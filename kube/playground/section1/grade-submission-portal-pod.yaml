@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: grade-submission-portal # what is it?
+  labels:
+    app.kubernetes.io/name: grade-submission # ?
+    app.kubernetes.io/component: frontend # ?
+    app.kubernetes.io/instance: grade-submission-portal
+spec:
+  containers:
+    - name: grade-submission-portal
+      image: rslim087/kubernetes-course-grade-submission-portal
+      resources:
+        requests: # minimum requirements to run resources
+          memory: "128Mi" # memory can't be throttled
+          cpu: "200m" # memory can't be throttled
+        limits:
+          memory: "128Mi" # always set a memory limit
+      ports:
+        - containerPort: 5001
+    - name: grade-submission-portal-health-checker
+      image: rslim087/kubernetes-course-grade-submission-portal-health-checker
+      resources:
+        requests: # minimum requirements to run resources
+          memory: "128Mi" # memory can't be throttled
+          cpu: "200m" # memory can't be throttled
+        limits:
+          memory: "128Mi" # always set a memory limit
+          # cpu never set a limit (take advantage of as much CPU to get hands on)

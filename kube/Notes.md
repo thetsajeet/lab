@@ -72,3 +72,22 @@ Pods can run multiple containers, enabling sidecar patterns where auxiliary side
 Port Forwarding in Kubernetes
 Port forwarding creates a temporary connection between your local machine and a pod in the cluster. It's primarily used for debugging and testing purposes. The command structure is:  kubectl port-forward <pod-name> <local-port>:<pod-port>. For example, kubectl port-forward mypod 8080:80 forwards local port 8080 to port 80 of the pod.
 
+---
+
+## Service Discovery
+
+1. Pods are ephemeral. So pod IPs are not reliable
+2. Service discovery port forwards the incoming requests to the right IP address of the Pod by querying using pod's labels. (use's kube proxy)
+3. Node Port allows external access to the Kubernetes network by exposing a static port on the node (range: 30000-32767).
+4. Node Port is not advisable in Production as it opens a port on every node nevertheless a pod is running or not.
+5. Cluster IP is prefered for multi node applications. Cluster IP targets internal pod to pod communication.
+6. Cluster IP resolves a name (domain name) to the cluster ip that's changing constantly.
+7. Pass the env variables via the yaml files (not secure)
+
+
+## Namespaces
+
+1. Logical boundaries that separate different resources. Eg: Monitoring namespace running pods related to ELK, Logs, etc.
+2. Do RBAC on namespaces
+3. By default all pods are deployed in default namespaces
+4. Either set up via command line or set it up in yaml config

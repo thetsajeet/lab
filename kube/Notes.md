@@ -91,3 +91,10 @@ Port forwarding creates a temporary connection between your local machine and a 
 2. Do RBAC on namespaces
 3. By default all pods are deployed in default namespaces
 4. Either set up via command line or set it up in yaml config
+
+## Self healing and Resiliency
+
+1. By default, process inside containers fail and pods fail. K8 automatically restarts the pods. `restartPolicy: Always`
+2. K8 restarts if the process fails. But it can't restart with default configurations if application become unresponsive. Eg: Deadlock situation.
+3. Can be configured to monitor unresponsiveness.
+

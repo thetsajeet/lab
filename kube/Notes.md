@@ -98,3 +98,16 @@ Port forwarding creates a temporary connection between your local machine and a 
 2. K8 restarts if the process fails. But it can't restart with default configurations if application become unresponsive. Eg: Deadlock situation.
 3. Can be configured to monitor unresponsiveness.
 
+## Deployments and Replica Sets
+
+1. Configure number of pods to be running by Deployments.
+2. Deployment.yaml sets up a deployment controller that creates a replica set which inturn signals replicaset controller to run specified number of replicas are running at all times.
+3. Self healing and Resiliency followed
+4. Deployment object -> number of pods and template of pods
+5. Remove pod.yaml and make it deployment.yaml with the changes
+
+
+
+
+
+

@@ -8,6 +8,11 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/instance: grade-submission-api
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 50%
+      maxSurge: 1
   template:
     metadata:
       labels:
@@ -17,7 +22,7 @@ spec:
     spec:
       containers:
       - name: grade-submission-api
-        image: rslim087/kubernetes-course-grade-submission-api:stateless
+        image: rslim087/kubernetes-course-grade-submission-api:stateful
         resources:
           requests:
             memory: "128Mi"

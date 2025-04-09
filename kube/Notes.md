@@ -107,7 +107,13 @@ Port forwarding creates a temporary connection between your local machine and a 
 5. Remove pod.yaml and make it deployment.yaml with the changes
 
 
+## Rolling Updates and Rollbacks
 
+1. Gradually update the pods. Have the old pods still serving the request, but new pods will be replacing the old pods as and when it creates. minimizing downtime
+2. Rollbacks can also be done: `kubectl rollout undo deployment/<>`
+3. Specify the type of strategy for updates: RollingUpdate
+4. maxUnavailable: The maximum number of pods that can be unavailable during the update.
+5. maxSurge: The maximum number of pods that can be created over the desired number of pods.
 
 
 

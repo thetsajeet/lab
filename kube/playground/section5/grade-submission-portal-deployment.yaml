@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: grade-submission-portal # what is it?
+  namespace: grade-submission-namespace
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: grade-submission-portal
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: grade-submission # ?
+        app.kubernetes.io/component: frontend # ?
+        app.kubernetes.io/instance: grade-submission-portal
+    spec:
+      containers:
+        - name: grade-submission-portal
+          image: rslim087/kubernetes-course-grade-submission-portal
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 3000
+            initialDelaySeconds: 15
+            periodSeconds: 5
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port: 3000
+            periodSeconds: 5
+          env:
+            - name: GRADE_SERVICE_HOST
+              value: grade-submission-api
+          resources:
+            requests: # minimum requirements to run resources
+              memory: "128Mi" # memory can't be throttled
+              cpu: "200m" # memory can't be throttled
+            limits:
+              memory: "128Mi" # always set a memory limit
+          ports:
+            - containerPort: 5001

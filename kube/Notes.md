@@ -115,5 +115,12 @@ Port forwarding creates a temporary connection between your local machine and a 
 4. maxUnavailable: The maximum number of pods that can be unavailable during the update.
 5. maxSurge: The maximum number of pods that can be created over the desired number of pods.
 
+## Liveness & Readiness Probe
+
+1. Restarts the container if application is not operational -> Liveness Probe
+2. Liveness can be set -> /healthz endpoint (which is custom configured)
+3. Applications could be operational but not ready -> Readiness probe
+4. Readiness can be set -> /readyz (custom custonfigured)
+5. Usage Use liveness probes to detect and restart unhealthy containers. Use readiness probes to determine when a container is ready to start accepting traffic. Together, they ensure your application remains healthy and responsive in a Kubernetes environment.
 
 

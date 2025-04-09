@@ -132,7 +132,12 @@ Port forwarding creates a temporary connection between your local machine and a 
 5. Matches local directory storage from pod to physical space on the machine (mounts data). This is managed by K8 via PVC
 6. Never have env in yaml configs.
 
+## ConfigMaps and Secrets
 
+1. Store env variables separate from config.yaml files.
+2. ConfigMap contains non-confidential data
+3. Secret contains sensitive / confidential data
+4. Passwords in secret are given in base64 format because passwords contain special characters that have to be captured in yaml files (which wont eg: '\|). so base64 converts the password in to safe characters (a-z, A-Z, 0-9)
 
 
 

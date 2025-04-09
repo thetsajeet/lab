@@ -123,4 +123,24 @@ Port forwarding creates a temporary connection between your local machine and a 
 4. Readiness can be set -> /readyz (custom custonfigured)
 5. Usage Use liveness probes to detect and restart unhealthy containers. Use readiness probes to determine when a container is ready to start accepting traffic. Together, they ensure your application remains healthy and responsive in a Kubernetes environment.
 
+## Storage
+
+1. Pods are ephemeral. So allocating a Persistent Volume is essential while dealing with storage.
+2. This is done via Persistent Volume Claim (finds a physical piece of space in the machine - persistent volume)
+3. Statefulsets are used to manage pods that have storage requirements.
+4. All stateful pods have a unique id (ordered). Each pod accesses a dedicated storage assigned
+5. Matches local directory storage from pod to physical space on the machine (mounts data). This is managed by K8 via PVC
+6. Never have env in yaml configs.
+
+
+
+
+
+
+
+
+
+
+
+
 

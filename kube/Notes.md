@@ -174,6 +174,8 @@ Port forwarding creates a temporary connection between your local machine and a 
 
 ## Helm Package Manager
 
+> helm is used to manage configurations for kubernetes
+
 1. Create helm charts to generate a helm package and make a helm release
 2. Convert helm objects to templates
 3. Charts: for creating helm metadata (name + version)
@@ -181,7 +183,10 @@ Port forwarding creates a temporary connection between your local machine and a 
 5. templates: to store the template (configmap, deployments, state, etc) in folder
 6. to create a package -> helm package template . -> release created
 7. once package is done -> if you want to run the managed release -> helm install <>
-8. 
+8. to upgrade without (packaging and applying everytime. not for first time) -> helm upgrade <package name> .
+9. to rollback -> helm rollback <package name> <revision-number>
+10. add helm repos from outside (bitnami) and use specific deployments in your project.
+
 
 
 

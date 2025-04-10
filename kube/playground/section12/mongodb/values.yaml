@@ -1,0 +1,7 @@
+useStatefulSet: true
+
+auth:
+  enabled: false
+
+persistence:
+  mountPath: /data/db

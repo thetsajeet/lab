@@ -1,5 +1,21 @@
 # Kubernetes
 
+## Contents:
+
+1. History
+2. Pods
+3. Services
+4. Namespaces
+5. Self healing
+6. Deployments
+7. Rolling updates
+8. liveness and readiness
+9. statefulsets, pvc
+10. configmap, secrets
+11. hpa
+12. ingress
+13. helm charts
+
 ## History of K8
 
 Microservices are harder to manage.
@@ -146,6 +162,26 @@ Port forwarding creates a temporary connection between your local machine and a 
 3. K8 has metrics server that collects information about metrics. (out of the box)
 4. Use metrics in the hpa.yaml to scale targets up and down elastically based on utilization or any relevant metrics
 
+> If any portal pods fail up to this point -> the port should be 5001 not 3000 in config
+
+## Ingress
+
+1. Traditionally we won't be managing port-forwarding with NodePort. (multiple nodes in production)
+2. Ip addresses are also changed frequently
+3. Ingress Controller acts as reverse proxy that determines where traffic must be sent.
+4. Install ingress controller and set up ingress rules to apply ingress.
+5. No more NodePort required. Use ClusterIP
+
+## Helm Package Manager
+
+1. Create helm charts to generate a helm package and make a helm release
+2. Convert helm objects to templates
+3. Charts: for creating helm metadata (name + version)
+4. values: for storing the value variables
+5. templates: to store the template (configmap, deployments, state, etc) in folder
+6. to create a package -> helm package template . -> release created
+7. once package is done -> if you want to run the managed release -> helm install <>
+8. 
 
 
 

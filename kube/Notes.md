@@ -139,8 +139,12 @@ Port forwarding creates a temporary connection between your local machine and a 
 3. Secret contains sensitive / confidential data
 4. Passwords in secret are given in base64 format because passwords contain special characters that have to be captured in yaml files (which wont eg: '\|). so base64 converts the password in to safe characters (a-z, A-Z, 0-9)
 
+## HPA
 
-
+1. Horizontal Pod Autoscaler - elastically scales up and down based on configuration specified.
+2. CPU is the preferred metric for autoscaling. (CPU is compressible but memory is incompressible)
+3. K8 has metrics server that collects information about metrics. (out of the box)
+4. Use metrics in the hpa.yaml to scale targets up and down elastically based on utilization or any relevant metrics
 
 
 

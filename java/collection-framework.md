@@ -68,3 +68,163 @@ class SComparator implements Comparator<String> {
 - Java 8 has comparing static method.
 - comparator = Comparator.comparing(Class::value).reversed().thenComparing(Class:value2) ... etc.
 - list.sort(comparator)
+
+## LinkedList
+
+- Items are stored in different memory location but are linked to form an ordered collection.
+- Items are stored in node in LinkedList
+- By default linked list is doublly linked list.
+
+```java
+LinkedList<Integer> l = new LinkedList<>();
+.add();
+.addLast();
+.addFirst();
+.get();
+.getFirst();
+.getLast();
+.removeIf(x -> {});
+.removeAll(list);
+.
+```
+
+## Vector
+
+- Synchronized unlike ArrayList and LinkedList. So there's also overhead as locking and unlocking.
+- Use in multithreaded environment.
+- Vector<Integer> v = new Vector<>();
+- Vector by default increments 2x times. Or can be specified during init.
+
+## Stack
+
+- Stack extends Vector
+- LIFO
+- .push()
+- .pop()
+- .peek()
+- .isEmpty()
+- .size()
+- can use stack as regular vector as well.
+- .search() -> one based index
+- LinkedList can be used as Stack
+
+## CopyOnWriteArrayList
+
+- a new list is created when write operation is made.
+- read ops happen on stable list (fast) and write happens on new copy, once saved -> updated.
+- read intensive environment.
+- Read and modify at the same time: use this.
+- Only when read operation is completed, the write updates are made, until then they are put on hold.
+
+## Map
+
+- Interface to maintain key-value pairs
+
+## HashMap
+
+- HashMap<Integer, String> map
+- .put()
+- .get()
+- .containsKey()
+- .containsValue()
+- .keySet() // convert map keys to set to do for loop => for(int i : m.keySet()) {}
+- It's not stored in order.
+- .entrySet() => get's an iterable collection to run for loop and within use .getValue() and .getKey()
+- .remove(key)
+- .remove(key, value) // remove the
+- not Synchronized
+- can have null for key and value
+- When you write custom classes to store in hashmap -> memory address of the object is key.
+- If you have different objects with same internal values, override hashcode and equals method in the class to define how hashmap works.
+
+## Internal structure of HashMap
+
+- key, value, bucket, hash function
+- key -> hash function -> index to store in bucket array
+- Uses linkedlist (older) and balanced trees (red black trees newer) to store hashed keys when collision occurs.
+- Resizing occurs when number of pairs are more than the load factor (0.75)
+- When resized, all keys are rehashed. (array size is doubled)
+
+## LinkedHashMap
+
+- order is maintained (double linked list)
+- slower due to maintaining order.
+- accessOrder: false for insert order, : true for LRU
+- .getOrDefault()
+- .putIfAbsent()
+- not thread safe
+
+## WeakHashMap
+
+- GarbageCollection -> When object is no longer in use, JVM automatically clears it using GC.
+- WeakReference<> manually remove the garbage.
+- WeakHashMap<>
+- using String as key => is strong reference (strings are stored in string pools)
+- WeakHashMap uses keys and are weakly referenced. Once keys are marked null and gc is called, key-value pair from WeakHashMap is removed. Not so in HashMap.
+
+## IdentityHashMap
+
+- object's hashcode is used to compare (not class's hashcode as hashmap)
+- key1 = new String(""), key2 = new String(""). in hashmap when adding k1 and k2, only one k is added. but in IdentityHashMap two keys are added.
+
+## Comparable
+
+- Comparator vs Comparable
+- Comparable interface to tell natural ordering of elements (defined in class). (compareTo)
+- Comparator for custom sorting logic. (compare method)
+
+## SortedMap
+
+- Interface that extends Map.
+- Sorting on the basis of keys.
+
+## TreeMap
+
+- Sorting on the basis of keys in natural order (the key class must implement comparable)
+- .firstKey()
+- .lastKey()
+- .headMap() // upto what key
+- .tailMap() // from which key
+- can't access null
+- TreeMap internally uses RedBlack Tree
+- All operations are O(logN)
+
+## NavigableMap
+
+- Interface
+- .lowerKey() // greatest key strictly less than a key or null
+- .ceilingKey() // least key greater than or equal to key
+
+## HashTable
+
+- legacy class
+- Synchronized
+- no null key or value
+- replaced by ConcurrentHashMap
+- slower because of overhead.
+- Hashtable all methods are Synchronized.
+- Only one thread can modify at a time
+
+## ConcurrentHashMap
+
+- Extends ConcurrentMap interface
+- Before java 8 -> segment based locking
+- After java 8 -> compare and swap approach. (no locking except resizing or collision)
+- Synchronized
+
+## ImmutableMap
+
+- Content is not modified/ added/ removed when instantiated.
+- Map.of() for 10 k-v pairs.
+- Map.ofEntries(Map.entry())
+
+## EnumMap
+
+- new EnumMap<>(CustomEnum.class)
+
+## ConcurrentSkipListMap
+
+- sorted and concurrent map
+- internal structure is skip list (probabilistic data structure)
+- sorted linked list skip over portions for faster access
+- multiple layers contain ranges. value to find will be in O(logN)

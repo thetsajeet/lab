@@ -330,3 +330,60 @@ LinkedList<Integer> l = new LinkedList<>();
 - groupby => generate by length as key for treemap.
 - partitionBy => split based on predicate.
 - mapping => do something before collecting.
+
+## Primitive Streams
+
+- int[] n = {} => IntStream
+- .boxed() => wrapper
+
+## Iterable
+
+- .iterator()
+- with .hasNext() .next(), .remove(), ...
+
+## Sets
+
+- Set -> HashSet, LinkedHashSet, TreeSet, EnumSet
+- Collection.synchronizedSet(set) // make it sync available for all collections.
+- concurrentSkipListSet vs copyOnWriteArraySet
+
+## Queues
+
+- LinkedList can act as Queue
+- add, remove, peek
+- Queue is an interface.
+- LinkedList extends Queue.
+- remove throws exception, poll returns null
+- element throws exception, peek returns null
+
+## ArrayBlockingQueue
+
+## PriorityQueue
+
+- Customized ordering of elements inside queue.
+- new PriorityQueue<>(Comparator.reverseOrder())
+
+## Deque
+
+- insertion and deletion at both ends.
+
+## ArrayDeque
+
+- implementation of Deque
+
+## LinkedList for Deque
+
+## BlockingQueue
+
+- Threads
+- waits for queue to be empty / non-empty for specific operations.
+- ArrayBlockingQueue and LinkedBlockingQueue
+- PriorityBlockingQueue
+- SynchronousQueue (capacity at most 1)
+- DelayQueue
+
+## ConcurrentLinkedQueue
+
+- lock-free thread safe
+
+## ConcurrentLinkedDeque

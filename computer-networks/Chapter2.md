@@ -147,3 +147,38 @@
 - command sent -> ftp server replies. (1 at a time)
 
 ## Email
+
+- electronic mail
+- 3 components: user agents, mail server, SMTP
+- other components: message queue, mailbox
+- sender creates a mail to recipient and sends the mail via user agent.
+- user agent puts the mail in message queue of sender, sends it on it's turn.
+- creates a smtp handshake
+- if it fails, it retries by putting it in the queue again. if fails multiple times, it notifies the sender
+- once it reaches the recipient, it is stored in the recipient's mailbox
+- when recipient logs in, the mail is read using the mail agent from the mailbox
+- Simple Mail Transfer Protocol, works on top of TCP
+- no intermediary mail servers are present. it's a direct 1-1 communication
+- port: 25
+- 7 bit ASCII char limit
+- sample exchange
+
+```bash
+# after smtp connection established
+#s -> 220 domain
+#c -> HELO host
+#s -> 250 Hello host, pleased to meet you
+#c -> MAIL FROM: <sender address>
+#s -> 250 ... ok
+#c -> RCPT TO: <receiver address>
+#s -> 250 ... ok
+#c -> DATA
+#s -> 354 enter mail, end with '.' on a separate line
+#c -> hey
+#c -> i'm good
+#c -> .
+#s -> 250 accepted
+#c (repeats mail from if more messages to the same domain) # persistent connection
+#c QUIT
+#s 221 closing
+```

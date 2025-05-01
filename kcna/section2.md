@@ -17,19 +17,19 @@
 ## CN best Practices
 
 - IaaC:
-    - Terraform
+  - Terraform
 - CI/CD:
-    - Continuous Integration -> initiation by human
-    - Continous Delivery -> everything is automated (d could be deployment in general. but for kcna it
+  - Continuous Integration -> initiation by human
+  - Continous Delivery -> everything is automated (d could be deployment in general. but for kcna it
     s delivery)
 - Security:
-    - zero trust
-    - least privilege
-    - secure channel
+  - zero trust
+  - least privilege
+  - secure channel
 - Speed / Efficiency and Cost
 - Service Discovery:
-    - automatic need for detection of different services
-    - envs and DNS by k8
+  - automatic need for detection of different services
+  - envs and DNS by k8
 
 ## Key Pillars of CN Architecture
 
@@ -42,12 +42,12 @@
 
 - Automatic scaling up and down
 - Types:
-    - reactive autoscaling: react to a metric
-    - scheduled autoscaling: schedule
-    - predictive autoscaling: AI/ML intelligent autoscaling
+  - reactive autoscaling: react to a metric
+  - scheduled autoscaling: schedule
+  - predictive autoscaling: AI/ML intelligent autoscaling
 - Direction
-    - vertical scaling: Add CPU/Memory or add more virtual machines
-    - horizontal scaling: Add more servers.
+  - vertical scaling: Add CPU/Memory or add more virtual machines
+  - horizontal scaling: Add more servers.
 - Cluster Autoscaler for K8 clusters
 - HPA and VPA for K8 for pods
 - KEDA event driven autoscaling for K8
@@ -64,13 +64,13 @@
 
 - CNCF - vendor neutral
 - Graduating:
-    - Innovators / Techies
-    - Early adopters / Visionaries
-    - Chasm
-    - Early majority / pragmatists
-    - Graduated
-    - Late majority / conservatives
-    - Laggards / Skeptics
+  - Innovators / Techies
+  - Early adopters / Visionaries
+  - Chasm
+  - Early majority / pragmatists
+  - Graduated
+  - Late majority / conservatives
+  - Laggards / Skeptics
 - CNCF TOC - technical oversights committee
 - sandbox -> incubation -> graduation
 - Grey / shaded boxes -> not vendor neutral but is in CN landscape
@@ -82,9 +82,9 @@
 
 - DevOps engineer: Dev + Operations
 - SRE engineer: Reliability, Availability, Scalability, Robustness, etc.
-    - SLA: Service Level Agreements -> 97% uptime
-    - SLO: Service Level Objectives -> 300ms latency
-    - SLI: Service Level Indicators -> current uptime and latency
+  - SLA: Service Level Agreements -> 97% uptime
+  - SLO: Service Level Objectives -> 300ms latency
+  - SLI: Service Level Indicators -> current uptime and latency
 - CloudOps engineer - Emphasis on right side of devops infinity loop (deploy, operate, monitor, etc.)
 - Security engineer - attack vectors, network, etc.
 - DevSecOps engineer - devops + security engineer
@@ -92,22 +92,21 @@
 - Cloud architect - design / architect platform, tooling, etc.
 - Data engineer - data expertist such as big data, analytics
 - FinOps engineer - financial + it + business
-- ML engineer - ML to predict cost, run systems 
+- ML engineer - ML to predict cost, run systems
 - Data Scientist - Interpret complex datasets
 
 ## Open Standards
 
 - Avoid vendor lock in
 - OCI -> Open Container Initiative -> docker, podman, buildah
-    - image specification
-    - runtime specification
-    - distribution
+  - image specification
+  - runtime specification
+  - distribution
 - CNI -> Container Network Interface
-    - required by K8 (transition from not ready to ready)
-    - flannel
+  - required by K8 (transition from not ready to ready)
+  - flannel
 - CSI -> Container storage interface
-    - rook
+  - rook
 - CRI -> Container runtime interface
-    - kubelet
+  - kubelet
 - SMI -> Service Mesh interface
-

@@ -5,3 +5,5 @@ Lab is my personal repository to learn different technologies, store notes and h
 ## Chapters
 
 - [Kube](/kube)
+- [Computer Networks](/computer-networks)
+- [Java](/java)

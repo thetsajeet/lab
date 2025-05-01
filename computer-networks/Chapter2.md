@@ -72,7 +72,7 @@
 - http server has a timeout interval, that closes the connection after it's inactive
 - multiple web pages can be sent without waiting for replies of pending requests (pipelining)
 
-## HTTP message format
+### HTTP message format
 
 - request
 
@@ -96,3 +96,54 @@
 # cr lf
 # <body>
 ```
+
+### Cookies
+
+- cookies are used to track user activity by server.
+- since http is stateless, cookies add as a session layer on top of HTTP which can help in tracking requests (login, etc)
+- cookie has 4 components: in request header, in response header, backend storage, browser storage
+- when server sends a cookie -> set-cookie: 1678
+- browser reads it and appends to the cookie file
+- when client sends requests it adds necessary cookies from the file -> Cookie: 1678
+- server checks database to understand the cookie
+
+### Caching
+
+- Web caches or Proxy servers are intermediary components that store object references in it.
+- Reduces the traffic on origin servers.
+- client sends a request to cache, if cache has the object returns it, else fetches from origin server and stores it in the cache and returns the response from cache to client.
+- cache helps in speed and also reduce traffic + cost on origin server
+- What if the object copied locally is stale?
+- Conditional GET mechanism: When cache recieves a request, it will send a If-Modified-Since header with Get request to the origin server.
+- If the origin server responds with 304 => content is not updated. so keep the same
+- if modified it will send the response status code (2xx) with the content. now cache will be updated
+
+## FTP
+
+- File Transfer Protocol
+- User sitting in front of one host wants to transfer files to/from another host
+- FTP runs on top of TCP
+- FTP uses 2 parallel connections.
+- Port 21 for control connection (auth, cd, put, get)
+- Port 20 for data connectoin (file)
+- FTP uses separate control connection (port 21) => out-of-band. while http, smtp => in-band (request headers)
+- user starts an FTP session via FTP agent with a remote host.
+- client initiates TCP control connection on port 21 => user identification and password
+- when server receives command for file transfer, it creates a data connection (port 20) and sends it.
+- sends only one file and closes it. to send again (open it) non persistent
+- same with client sending a file
+- FTP server must maintain state of user.
+- restriction on number of ftp connections.
+- 1-1 correspondance between user command issued and ftp reply in the control connection
+- user commands are of this format: COMMANDNAME arg
+
+```bash
+# USER username
+# PASS password
+# RETR filename
+# STOR filename
+```
+
+- command sent -> ftp server replies. (1 at a time)
+
+## Email

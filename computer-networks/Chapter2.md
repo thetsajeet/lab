@@ -182,3 +182,93 @@
 #c QUIT
 #s 221 closing
 ```
+
+- http and smtp both use TCP, persistent connections
+- http is a pull protocol, smtp is push
+- smtp has 7 bit ascii limit
+- http uses references of objects in document, while smtp has all objects in the message
+- smtp header lines include
+
+```bash
+# From:
+# To:
+# Subject:
+```
+
+- access agents can run locally, while fetching from mailbox running on the cloud mail server
+- a sends mail to b via smtp. a sends to his mail server -> that is sent to b's mail server. -> since smtp is push protocol, b's user agent has to adopt pull protocol to get messages from b's mail server to his local access agent
+- pull protocols used could be POP3, IMAP, HTTP
+
+### POP3
+
+- Post Office Protocol - Version 3
+- simple mail access protocol
+- user agent opens a tcp connection w mail server on port 110
+- pop3 progresses through 3 stages: authorization, transaction, update
+- authorization is done by passing username and password
+- transaction phase user retrieves messages, marks the messages to delete, get mail stats, etc. (not yet deleted)
+- after quit command, session is closed, mail server deletes the messages marked for deletion
+- for user agent commands, pop3 responds with +OK or -ERR to indicate success or failure
+
+```bash
+# telnet mailserver 110
+# +OK POP3 server ready
+# user bob
+# +OK
+# pass pass
+# +OK user logged in
+```
+
+- pop3 session maintains state, but not after session is closed.
+
+### IMAP
+
+- Internet Mail Access Protocol
+- Allows users to create folders, move mails, delete, etc on remote server via IMAP
+- All messages fall in the INBOX by default, and user can perform commands
+- IMAP maintains state information across sessions
+- allows to obtain parts of a message - header
+
+### Web-based Email
+
+- uses HTTP as well
+- to receive mails from mail server to mailbox in browser
+- to send mails from browser to his mail server
+- SMTP is used to send mails from mail server to mail server
+
+## DNS
+
+- hostname and IP addresses to identify servers
+- IP address -> 4 bytes -> 32 bits -> 0 to 255 -> left to right hierarchical
+- Domain Name System is a directory service that translate domain names to IP addresses
+- distributed machine implemented in a hierarchy of dns servers.
+- dns protocol allows hosts to query distributed database.
+- dns server are UNIX machines running the Berkley Internet Name Domain (BIND) software
+- uses UDP on port 53
+- employed by other protocols
+- when browser searches a domain, it checks w the DNS server the ip address of the domain and routes the request
+- DNS adds a delay in request-response
+- desired IP addresses are cached in nearby DNS server
+- services:
+  - host aliasing: have a canonical (actual) and multiple alias names
+  - mail server aliasing: mail server can also be complex, so have alias. MX records permit it to have same alias for both mail server, and hosts
+  - load distribution: if servers are replicated, DNS has the list of all IP addresses mapped to the name. when sending it to client with rotating one of the addresses ordering -> so all load can be equally distributed when client makes a request (as they check the first IP address)
+
+### DNS working
+
+- application invokes DNS to query the IP address based on hostname
+- responds with IP address
+- if a single centralized DNS is used:
+  - single point of failure
+  - huge traffic
+  - distant centralized database
+  - maintenance difficulty
+- 3 classes of DNS servers:
+  - root dns servers: multiple root dns servers each replicated => n \* m root dns servers globally
+  - TLD: top level domain servers consists of .edu, .fr, etc
+  - authoritative dns servers: org's publicaly accessible hosts must provide publicaly accessible dns records
+- there's a local dns server provided by ISP which the client accesses's first.
+- host reaches to local dns with the query
+- local dns checks with root level -> checks with tld -> checks with authoritative -> returns the IP addresses back to host
+- iterative query when manually checks are made (host -> dns iterative). recursive when on it's own it decides where to fetch (local dns recursive)
+-

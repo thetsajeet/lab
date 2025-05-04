@@ -271,4 +271,83 @@
 - host reaches to local dns with the query
 - local dns checks with root level -> checks with tld -> checks with authoritative -> returns the IP addresses back to host
 - iterative query when manually checks are made (host -> dns iterative). recursive when on it's own it decides where to fetch (local dns recursive)
--
+- dns caches in the servers to avoid redundant calls
+- with dns cache, can skip multiple root / tld level calls
+
+### DNS Format
+
+- Resource Records (RR) are stored in DNS database
+- format: (Name, Value, Type, TTL)
+- Name, value depends on the type
+- Type = A => Name = hostname, Value = ip addr
+- Type = NS => Name = domain name, value = hostname of authoritative dns server
+- Type = CNAME => Name = alias, value = canonical host name
+- Type = MX => Name = alisa, value = canonical host of mail server
+- If DNS is authoritative for hostname it contains type A, else Type NS and Type A for the value of NS
+- both query and reply have same format
+
+```bash
+# first 12 bytes -> header section
+# first field (16 bits) -> query identifier (copied to reply)
+# flags -> <query/reply> (0/1) <authoritative flag> <recursion desired flag> <does dns support recursrion>
+# 4 number-of fields => questions, answers, authority, additional section
+```
+
+- To insert records in DNS is done by registrars with domain name and IP address
+- provide name and address of authoritative dns servers to registrar, he will add them in the TLD (eg .com)
+- type ns, a are added. when tld is queried for the domain
+- alice requests for tsajeet.vercel.app in browser
+- browser contacts local / regional dns
+- local contacts root level (if not cached) which sends records of the .app TLD
+- local contacts TLD for tsajeet.vercel.app and gets type ns and a records
+- uses value of ns, to check value of a and contacts the authoritative dns server for ip address (type a record)
+- receives type a from authoritative dns
+- local dns sends this ip address back to browser
+- browser makes a http request to ip address
+
+## Peer to peer applications
+
+- peers don't rely on infrastructure servers. they directly communicate with peers
+- distribution time is the time it takes for each peer to get a copy.
+- client-server => Distribution Time = max(N\*F/Us, F/dmin)
+- p2p => DT = max(F/Us, F/dmin, NF/(Us + U1 + U2 ... UN))
+- N => number of peers, F => file bits, Us => upload speed of server, dmin => lowest peer download rate, U1 => upload speed of peer 1
+- client-server grows linearly with N. but p2p will bend as number of peers grow (3rd eq)
+- p2p is self scalable
+
+### Bit Torrent
+
+- BitTorrent is a p2p protocol
+- collection of all peers participating -> torrent
+- when a peer first joins, it has no chunks.
+- once it accumulates chunks, it can upload and download to peers
+- peer may leave and enter at any point of time
+- each torrent has an infrastructure node called the tracker which tracks the number of peers participating
+- each torrent informs its tracker that it is still participating
+- when new peer joins the torrent, tracker randomly selects a subset of peers and sends them the IP to new user
+- new user attempts to establish tcp connection with all peers in the list -> neighboring peers
+- each peer will have different set of chunks
+- it will try to find the rarest first and store it in it
+- 2 important decisions:
+- what chunks to request -> rarest first algorithm
+- what neighbors to respond to -> top 4 highest bandwidth (unchoked) + randomly next highest bandwidth (optimistically unchoked)
+- many alogrithms are also used.
+
+### DHT
+
+- distributed hash table in p2p allows any peer to query, insert key-value pairs.
+- every peer will hold a small subset of k-v pairs
+- assign each peer an identifier in the range O to 2n-1
+- each key to be stored in DHT also to be in the range 0 to 2n-1
+- convert any key to hash key using hash function that outputs in the range
+- to find a particular key-value pair in the system => convert the key to hash key and find the closest successor of the peer
+- eg: 0, 1, 2, 4, 6, 11 and key -> 3 => closest founda at 4
+- how to determine the closest key in the available set of keys? => circular DHT
+- one way is to store all peers list (Mesh overlay) but O(N) to track
+- another way is to store the successor and predecessor of each peer => O(N) to send messages - circular overlay
+- another way is to have shortcuts in circular overlay -> O(logN)
+- peer churn: peer can come and leave abruptly.
+- each peer maintains two successor and periodically verifies if the successors are in the torrent. if not it updates
+- to join torrent, peer will send info to the first peer and it checks the position of the peer by sending the message to successor until it finds a position
+
+## Socket Programming

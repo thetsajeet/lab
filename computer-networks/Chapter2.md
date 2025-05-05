@@ -351,3 +351,17 @@
 - to join torrent, peer will send info to the first peer and it checks the position of the peer by sending the message to successor until it finds a position
 
 ## Socket Programming
+
+- UDP client-server:
+  - create a server on a server socket (port)
+  - run an infinite loop to listen to messages received on the server socket
+  - read message and write back to the server socket
+  - create a client on a client socket (port)
+  - create a datagram with server ip and server socket
+  - send via client socket and read from client socket
+  - close the client connection
+- TCP client-server:
+  - server must accepts a welcoming socket where tcp handshake can be completed
+  - client first tries to connect to tcp via the welcoming socket
+  - then server creates a new dedicated socket for the client called the connection socket and data is exchanged over here
+  - server listens for other client sockets connections as well

@@ -113,3 +113,71 @@
 - ack - tell if packet is received correctly
 - nak - packet has not been received correctly
 - window, pipelining - packets w certain sequence number at one time.
+
+## TCP
+
+- 3 way handshake
+- both ends maintain a buffer
+
+```bash
+source port destination port
+seq number
+ack number
+header length + unused + urg + ack + psh + rst + syn + fin + receive window
+internet checksum + urgent data pointer
+options
+data
+```
+
+- ports for multiplexing and demultiplexing
+- 32bit seq & ack for sender and receiver side reliable data transfer
+- 16 bit receive window for flow control
+- 4 bit header length -> length of header
+- options field -> negotiate the MSS (length of segment)
+- flag => ack (ack), rst, syn, fin (connection setup and teardown), psh (send to upper layer immediately), urg (urgent) location of last byte of urgent data is pointed by 16 bit urgent data pointer sequence numbers are numbered from 0 -> 1000 -> 2000 when sent. no numbered by the segment but rather by bytes transmitted. if MSS = 1000
+- ack number -> seq number of next byte the host expects from receiver. eg: if 500 bytes are received, wait for 501 it sends that to the ack number in the next packet it sends
+- cumululative acknowledgements
+- if gets out of order packets -> discard or buffer it
+- Telnet works on top of TCP (but preferred is SSH because telnet is not encrypted)
+- client and server communicates back and forth by client sending, server echoing back the same with ack
+- RTT => segment sent and ack received
+- prefered a single timer for all tcp segments
+- timeouts: 3 major events -> data from above, event timeout (restart), ack from receiver
+- tcp is a hybrid of gbn and sr -> selective acknowledgement
+- tcp provides flow control using receive window flag that tells how much space is available in the buffer maintained by receiver.
+- since both ends maintain buffer, we don't want to overflow the buffer.
+- subtle difference with congestion control
+
+### How connection is established
+
+- first client sends segment with only the syn flag set to 1 => syn segment with a random initial client sequence number
+- once the server receives and server responds with syn set to 1, ack number client seq + 1, server's seq number. before sending server allocates variables, buffers to this connection. called synack segment
+- client receives, sends the ack back to receiver with client data. syn is set to 0. client also allocates buffers, variables for this connection.
+- hence 3 way handshake
+- to close client sends close connections via fin bit set to 1. waits for ack (fin_wait_1 state). once ack is received waits for fin from server (fin_wait_2) sends ack to server once received. both connection is closed after some timeout.
+- Client: CLOSED -> SYN_SENT -> ESTABLISHED -> FIN_WAIT_1 -> FIN_WAIT_2 -> CLOSED
+- Server: CLOSED -> LISTEN -> SYN_RCVD -> ESTABLISHED -> CLOSE_WAIT -> LAST_ACK -> CLOSED
+- if the 3rd hanshake isn't sent from the client (ack) then the connection is open and resources are allocated and with a large number of such half-open connections, other clients will not be able to create connections. (Denial of Service Attacks - SYN flood attack)
+- so server waits for an ack for sometime, if it doesn't receive it closes the connection, also uses syn cookies.
+- when tcp segment is sent to a wrong port -> it gets a packet with RST flag set 1 for that segment
+- if udp segment is sent to a wrong port, host gets a ICMP datagram
+- nmap is used to check for applications running on ports:
+  - if source receives a tcp synack from target host, then application is running
+  - if source receives a rst segment, then application is not running but port is also not blocked by firewall
+  - if source receives nothing, port is blocked by a firewall
+- tcp also might use fast retransmit -> when 3 duplicate ACKs are received for the same segment, it immediately recognises a packet loss and resends that particular segment without waiting for timer to timeout for that segment
+
+### Priciples of Congestion Control
+
+- congestion basically leads to queuing delays, packet losses so retransmissions, etc
+- 2 ways: e2e provided by transport layers and network assisted congestion control
+- TCP layers uses e2e as IP layer doesn't provide any feedback
+- 3 parts:
+  - how tcp limits rate -> by having another variable congestion window to throttle the rate at which it sends
+  - how congestion is detected -> when loss of tcp segment / 3 duplicate acks from receiver
+  - which algorithm to use to send segments -> tcp congestion control algorithm
+- tcp congestion control algorithm:
+  - slow start: starts by sending w a mss of 1, doubles until there are no losses, timeouts, 3 duplicate acks
+  - congestion avoidance: once it has a threshold set for congestion (or found), instead of increasing x 2 -> increases 1 MSS
+  - fast recovery: once packets are lost, tries to identify which is lost, once finds out goes back to congestion state
+- tcp is fair (divides bandwidth equally), udp isn't

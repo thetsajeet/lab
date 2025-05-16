@@ -122,3 +122,15 @@
 - soln: IPv6
 
 ### IPv4 Addressing
+
+- host and router exchange information to/from the links via an interface.
+- interface is the boundary between the links and the host/ router.
+- this interface is given an address -> IP address
+- IPv4 is 32 bits long (4 bytes) -> 2^32 possible addresses
+- network interconnecting some host interfaces and router interface form a subnet
+- subnet addressing => xxx.xxx.xxx.xxx/y => /y subnet mask indicates that leftmost y bits fo the 32 bits define the subnet address
+- eg: 223.1.1.0/24 => 223.1.1.xxx => part of a subnet
+- to determine subnets -> detach each interface from host / router forming islands of isolated networks => subnet
+- Internet's address assignment strategy -> CIDR => Classless Interdomain Routing (CIDR)
+- CIDR addressing follows the a.b.c.d/x format where x of the address in the packet determines if the router should route it within the org or external based on some rules set.
+- Before CIDR it was Classful addressing where 1,2,3 bytes of subnets were formed (class a, b, c) -> over/under utilization of addresses

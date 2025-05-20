@@ -134,3 +134,82 @@
 - Internet's address assignment strategy -> CIDR => Classless Interdomain Routing (CIDR)
 - CIDR addressing follows the a.b.c.d/x format where x of the address in the packet determines if the router should route it within the org or external based on some rules set.
 - Before CIDR it was Classful addressing where 1,2,3 bytes of subnets were formed (class a, b, c) -> over/under utilization of addresses
+- When host sends a datagram on 255.255.255.255, it broadcasts message to all hosts on the same subnet
+
+### Obtain a block of address
+
+- When org wants to obtain a block of IP address for its org, it reaches out to ISP
+- ISP allocates a block from its address (eg: 200.23.16.0/20) to the org (eg: 200.23.16.0/23)
+- ISP gets its address from ICANN - Internt Corporation for Assigned Names and Numbers
+- ICANN responsible for managing DNS root servers and allocating IP addresses
+
+### DHCP
+
+- A host used to obtain an IP address by manual configuration
+- For routers, system admins manually configure IP address via network management tool
+- For hosts, addresses can be dynamically allocated using DHCP protocol
+- Dynamic Host Control Protocol -> allows hosts to receive an IP address from the subnet it's connected to.
+- Also called plug-and-play protocol
+- As clients come and leave the internet it allocates and deallocates IP address from a pool of IP addresses available
+- Each subnet will have a DHCP server (if not then use router as DHCP relay agent that knows the DHCP server for that network)
+- 4 step processes for new arriving DHCP client:
+  - DHCP server discovery:
+    - client sends a DHCP discover message as UDP packet to port 67
+    - but since address is not known, it will broadcast to 255.255.255.255 (this sends a packet to all connected hosts / routers in the subnet)
+  - DHCP server offers:
+    - DHCP servers recieve a discover message, and sends a DHCP offer message that is sent to all nodes in the subnet
+    - Many servers can offer a client, so client can choose from among one
+    - Each message will have transaction id, proposed ip address, network mask, ip address lease time
+    - ip address lease time - amount of time client can use the ip address in the subnet
+  - DHCP request:
+    - Client chooses one offer and responds to one with a DHCP request message echoing back the parameter
+  - DHCP ACK:
+    - server responds with a DHCP ACK
+- DHCP also provides a mechanism to renew the lease time
+- For mobile hosts, each time a new DHCP address is given in new subnet => difficult to maintain a TCP connection with remote application
+- soln: mobile IP
+
+### NAT
+
+- If more addresses are to be allocated within a subnet, or newer devices to be managed within the subnet, more address blocks are required
+- Instead for address allocation - Network Address Translation (NAT) is used in home routers
+- x.x.x.x/8 => one of the three portions of IP address space that is reserved for private network whose addresses have meaning only inside the network
+- host <==> nat-router <==> external router
+- NAT enabled router doesn't look like a router to the outside world, rather it looks like an entity requesting
+- host sends packets from its port to destination via nat-enabled router
+- nat-enabled router intercepts it, gives it's source IP address and new port which is available in the packet and sends to the destination
+- It also adds a new row in the NAT table
+- When it receives response, it checks it NAT table for the right source that requested from the destination and sends to it.
+- NAT router get IP address from ISP's DHCP server and home devices get it's IP within from router run DHCP server
+- IETF objects NAT router:
+  - port numbers are for processes and not hosts
+  - routers are supposed to be layer 3 only
+  - nat violates end-to-end agreement (destination talks to nat instead of host)
+  - use IPv6 instead of NAT
+  - P2P applications behind NAT can't talk directly. Work around is to have a separate peer c and a peer b that is not behind nat. Establish a tcp connection to peer a via peer c and talk.
+  - it's called -> connection reversal
+
+### UPnP
+
+- Universal plug-and-play protocol that lets hosts in private network create a mapping in NAT
+- Eg: Peer behind a NAT can request the NAT to create a mapping between its private address and port to public
+
+### ICMP
+
+- Internet Control Message Protocol
+- Used by hosts and routers to communicate network layer informationa with each other.
+- ICMP -> type, code, header and first 8 bytes of IP datagram
+- Traceroute is implemented using TTL ICMP type.
+- Send multiple UDP segments with a random port number from source to destination by incrementing the TTL value in each packet by 1.
+- After packet reaches the nth router, the TTL with n value is discarded as per IP protocol and the router sends back name of router and IP address (type 11 code 0) back to host to inform where it's discarded
+- One of them will make it to the destination port but destination will throw a type 3 code 3 error because the port number is likely wrong and send a response to the host.
+- This way the route taken by packets can be traced easily.
+
+### Firewalls and IDS
+
+- Firewalls are installed between network and internet.
+- Inspect datagrams and deny suspicious segments into the network
+- Can also block addresses, ports, to be entered / used.
+- Can be configured to block all ICMP echo types, etc.
+- IDS -> Intrusion Detection System is used to create an alert if a malicious packet enters based on the packet signature stored in db
+- IPS -> Intrusion Prevention System is used to block a malicious packet from entering

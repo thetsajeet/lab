@@ -213,3 +213,51 @@
 - Can be configured to block all ICMP echo types, etc.
 - IDS -> Intrusion Detection System is used to create an alert if a malicious packet enters based on the packet signature stored in db
 - IPS -> Intrusion Prevention System is used to block a malicious packet from entering
+
+### IPv6
+
+- IPv6 was created because people suspected IPv4 will be used up completely (not yet occurred)
+- IPv6 is 128 bit IP address (IPv4 was 32)
+- IPv5 was supposed to be ST-2 protocol but was later dropped
+- IPv6 allows anycast address -> allow a datagram to be delivered to any one of group of hosts
+
+#### Format
+
+- Version: 6 to indicate IPv6
+- Traffic Class: similar to TOS in IPv4 (priority)
+- Flow label: Label packets belonging to a flow for special handling
+- Payload length: Data length without headers
+- Next header: All information about header. Basically where routing header is, where protocol is, where data is in the same packet
+- Hop Limit: Contents of field are decremented by 1 every time it reaches a router. when becomes 0 -> discarded
+- Source and destination address: 128 bit
+- data
+
+#### Changes from IPv4
+
+- No fragmentation / reassembly. Responsibility of source and destination => faster forwarding. If size too much not able to send to the link, router throws an ICMP error message to host
+- No header checksum: Since transport layer performs header checksum, it's dropped in IPv6. => faster forwarding
+- Options: No options header. But fixed 40byte Next Header (contains header + protocol + some informations)
+
+#### Transition from IPv4
+
+- Dual stack approach
+  - New nodes must be both v6 and v4 compatible.
+  - when requested v4 send v4, else v6
+  - Problem, even if 2 end systems can communicate in v6, if intermediate is v4 then entire process becomes v4.
+  - converting v4 to v6 by router is not possible, as some fields are different in v4 and v6 => leads to information lose
+- Tunneling:
+  - Wrap the v6 packets in the v4 packet's data field and pass to v4 routers
+  - when received by a v6 entity, it will extract the data from the packet and use forward as v6
+  - Since it creates an imaginary tunnel, wraps entire datagram inside v4 packet and sends, it's considered tunneling approach
+
+### IPsec
+
+- IPsec is protocol designed to be backward compatible with v4 and v6
+- Implemented on source and destination
+- For secure communication
+- Services:
+  - Cryptographic agreement (cryptographic algo + keys)
+  - Encryption and Decryption
+  - Data integrity -> header checks
+  - Origin authentication
+- used in VPNs, secure channels, etc

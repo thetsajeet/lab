@@ -261,3 +261,5 @@
   - Data integrity -> header checks
   - Origin authentication
 - used in VPNs, secure channels, etc
+
+## Routing Algorithms

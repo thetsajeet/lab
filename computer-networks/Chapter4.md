@@ -263,3 +263,19 @@
 - used in VPNs, secure channels, etc
 
 ## Routing Algorithms
+
+- Network layer either provides datagram service (packets can take different routes) or VC service (same route)
+- but both host and destination are typically attached to a default router (first hop router for host)
+- good path: given a set of routes, take the least cost path
+- shortest path: shortest distance between 2 entities
+- Graph is used to formulate routing problems
+- Classification:
+  - global (computed at a single node or replicated nodes before offering connectivity) - Link state algorithm vs decentralized (node only has info about its directly attached links and calculate the route iteratively) - Distance Vector Algorithm
+  - static vs dynamic routing algorithms
+  - load sensitive (link's cost === current level of congestion) vs load insensitive (link's cost doesn't explicitly reflect current level of congestion)
+
+### Link State (LS) Routing
+
+- Link State requires all nodes have information about all other nodes in the network
+- Link State uses Djikstra's algorithm to find the least code from source node to destination node -> O(n^2) or optimized O(nlogn)
+- Might be oscillations in determining path if cost is based on the load carried -> randomize time router sends link advertisement

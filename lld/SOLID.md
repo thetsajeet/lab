@@ -1,7 +1,7 @@
 # SOLID Principles
 
-- A set of principles to build software components.
-- Makes the code maintainable, easy to understand.
+- A set of principles to build good software components.
+- Makes the code maintainable and easy to understand.
 - Aim for:
   - High cohesion: degree of inter-relatedness between software components. Eg: calculate area and perimeter.
   - Loose coupling: Software components must have low dependencies on external behaviors. Eg: calculate area and save it to db
@@ -204,3 +204,51 @@ class Copier implements IPrint, IScan {
   - fat interfaces
   - low cohesion
   - unimplemented methods in implementations
+
+## D - Dependency Inversion
+
+- DI states that high level modules should not depend on low level modules, both must depend on abstractions. Abstractions must not depend on details. Details must depend on abstractions.
+
+```java
+class ProductCatalog {
+    void getProducts() {
+        SQLRepo sql = new SQLRepo();
+        sql.listAll()
+    }
+}
+
+class SQLRepo {
+    void listAll() {
+        new SQLConnection("").select()
+    }
+}
+```
+
+- Here ProductCatalog is high level module which is dependent on low level module.
+
+```java
+class ProductCatalog {
+    void getProducts() {
+        Repo r = RepoFactory.create()
+    }
+}
+
+interface Repo {
+    void listAll() {}
+}
+
+class SQLRepo implements Repo {
+    void listAll() {
+        new SQLConnection("").select()
+    }
+}
+
+class RepoFactory {
+    static create() {
+        return new SQLRepo();
+    }
+}
+```
+
+- Product catalog and SQLRepo both depend on repo interface.
+- Repo factory is used to create instance of repo being used

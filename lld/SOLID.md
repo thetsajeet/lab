@@ -50,7 +50,7 @@ class Square {
     }
 }
 
-clas SquareRepo() {
+class SquareRepo {
     void save(Square s) {
         // save to mysql
     }
@@ -58,3 +58,41 @@ clas SquareRepo() {
 ```
 
 - this way if we want to change the logic of save, we will do in square repo only
+
+## O - Open Closed Principle
+
+- OCP suggests software components must be open for extension but closed for modifications
+
+```java
+class AreaCalculation {
+    int calculate(Square s) {
+        return s.area();
+    }
+
+    int calculate(Rectangle r) {
+        return r.area();
+    }
+}
+```
+
+- this way more methods are overloaded and original class is being modified
+
+```java
+interface Shape {
+    int area();
+}
+
+class AreaCalculation {
+    int calculate(Shape s) {
+        return s.area();
+    }
+}
+
+
+class Square implements Shape {}
+class Rectangle implements Shape {}
+```
+
+- this way original class won't change, if new shapes are added
+
+## L - Liskov's substitution principle

@@ -96,3 +96,65 @@ class Rectangle implements Shape {}
 - this way original class won't change, if new shapes are added
 
 ## L - Liskov's substitution principle
+
+- LSP states that objects must be replaceable by their subtypes without affecting the correctness of the program
+- LSP can be achieved by:
+  - break the hierarchy solution (use interfaces)
+  - tell don't ask (overwriting methods in derived classes)
+
+```java
+class Car {
+    int getInnerWidth() {}
+}
+
+class RaceCar extends Car {
+    @Override
+    int getInnerWidth() {throw error}
+    int getCockpitWidth() {}
+}
+```
+
+- with this approach, race car doesn't have an innerwidth, so when called throws error
+
+- break the hierarchy way:
+
+```java
+interface Vehicle {
+    int getWidth() {}
+}
+
+class Car implements Vehicle {
+    int getWidth() {
+        return getInnerWidth();
+    }
+
+    int getInnerWidth() {};
+}
+
+class RaceCar implements Vehicle {
+    int getWidth() {
+        return getCockpitWidth();
+    }
+
+    int getCockpitWidth() {}
+}
+```
+
+- tell don't ask.
+- client should not have to check if `isInstanceOf` car or racecar
+
+```java
+class Car {
+    int getInnerWidth() {}
+}
+
+class RaceCar extends Car {
+    int getInnerWidth() {
+        return getCockpitWidth();
+    }
+
+    int getCockpitWidth() {}
+}
+```
+
+## I - Interface Segregation Principle

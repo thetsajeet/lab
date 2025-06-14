@@ -66,5 +66,15 @@
   - better flexibility
   - better performance due to locality
   - closer to application code
+  - schema on read / implicit schema
+  - alter operation is faster
 - Relational:
-  -
+  - better support for joins
+  - many-1 and many-many relationships
+  - schema on write / explicit schema
+  - alter operation is slower
+
+### Imperative vs Declarative Query Languages
+
+- Imperative - tell exactly what must be done and how to do it (JS for applying styles)
+- Declarative - tell what must be done, how is decided by the software (eg: sql, css)

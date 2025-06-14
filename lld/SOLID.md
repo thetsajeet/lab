@@ -158,3 +158,49 @@ class RaceCar extends Car {
 ```
 
 ## I - Interface Segregation Principle
+
+- ISP states that client must not be forced to implement methods it doesn't need
+
+```java
+interface IMultiFunction {
+    void print();
+    void scan();
+}
+
+class Printer implements IMultiFunction {
+    void print() {}
+    void scan() {} // throw error
+}
+
+class Copier implements IMultiFunction {
+    void print() {}
+    void scan() {}
+}
+```
+
+- Printer doesn't need a scan method, so it throws error when called
+
+```java
+interface IPrint {
+    void print();
+}
+
+interface IScan {
+    void scan();
+}
+
+class Printer implements IPrint {
+    void print();
+}
+
+class Copier implements IPrint, IScan {
+    void print();
+    void scan();
+}
+```
+
+- This way printer only implements the interfaces it needs
+- Identifying ISP violations:
+  - fat interfaces
+  - low cohesion
+  - unimplemented methods in implementations

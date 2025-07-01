@@ -9,3 +9,5 @@
 - Beans are those that are configured once and can be used throughout the application, and can be received from application context.
 - Spring requires manual configuration of beans, Springboot doesn't.
 - Create springboot projects with spring initializer
+
+##

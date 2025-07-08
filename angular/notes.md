@@ -1,19 +1,5 @@
 # Angular Notes
 
-## Section 1
-
-### Introduction
-
-- Angular is s JS framework to build fast and reliable web applications
-- Why Angular?
-  - JS framework that supports declarative code over imperative style
-  - Comes with a suite of utilities designed for production and development such as debugging, compiler, etc.
-  - Separaton of concerns with components
-  - TS first code
-- AngularJS vs Angular
-  - AngularJS in v1 and built on top of JS.
-  - Angular is from v2-20(latest) built on top of TS
-
 ## Section 2
 
 ### How website is generated
@@ -480,3 +466,104 @@ function LogInterceptor(request: HttpRequest<unknown>, next: HttpHandlerFn) {
 - or have a template variable in each control <input #email="ngModel" /> and use `email.touched`
 - debounceTime(500) and debounces that is waits for 500ms without receiving any event then runs.
 - setValue, valueChanges
+
+```ts
+onSubmit(form: NgForm) {
+
+}
+
+constructor() {
+  afterNextRender(() => {
+    this.form.valueChanges...
+    this.form.setValue()...
+  })
+}
+```
+
+```html
+<form #form="ngForm" (ngSubmit)="onSubmit(form)">
+  <input #password="ngModel" ngModel name="password" />
+  <input #email="ngModel" ngModel name="email" />
+</form>
+```
+
+### Reactive Forms
+
+- handle form from .ts rather from template
+- imports: [ReactiveFormsModule]
+
+```ts
+const myValidator = (control: AbstractControl) => {
+  if (control.value.includes("?")) return null;
+  return { doesNotHave: true };
+};
+
+const myAsyncValidator = (control: AbstractControl) => {
+  if (control.value !== "") {
+    return of(null); // null as obs
+  }
+
+  return of({ notUnique: true });
+};
+
+const form = new FormGroup({
+  email: new FormControl("initial", {
+    validators: [Validators.required, myValidator],
+    asyncValidators: [myAsyncValidator], // must be an array of obs
+    nonNullable: false,
+    updateOn: "",
+  }),
+  password: new FormControl("initial"),
+});
+```
+
+```html
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <input formControlName="password" />
+  <input [formControl]="form.controls.email" />
+</form>
+```
+
+- patchValue to partial update an overall form
+- nested form groups, to access <div [formGroupName]="passwords"></div> where password = new FormGroup({password: new FormControl(), confirmPassword:new FormControl()})
+- array of form elements: source: new FormArray([new FormConrtol(), new FormControl()])
+- create a FormArray with as many FormControl as required. and to use it => formArrayName="source" and the element needs formControlName"0" index of the form array
+- FormGroup can also take validators just like FormControl
+
+## Section 14
+
+### Routing
+
+- Route to use different urls for serving different pages even though it is a SPA
+- It should feel like an application with multiple pages
+- Angular has CSR -> Client Side Routing
+- To have routing => in providers in root -> [provideRouter([{path: "", component: }])]
+- use <router-outlet></router-outlet> to tell where to render the route output
+- Needs RouterOutlet in imports
+- <a [routerLink]=["/tasks", "1"] routerLinkActive="selected" /> needs RouterLink imports
+- to use dynamic routes -> path: ":userid" -> with : makes it dynamic
+- get params via @Input or input() providerRouter([], withComponentInputBinding()) // to access params via input binding
+- alternate way as observable
+- activatedRoute = inject(ActivatedRoute) contains a list of observables
+- activatedRoute.paramMap.subscribe({next: paramMap => paramMap.get('id')})
+- nested routes => {path: "users", component: "", children: [{path: "id", component}]}
+- this nested route also needs in router-outlet
+- relative links don't start with `/` they are appended to current route link
+- to get parent params -> provideRouter([], withComponentInputBinding(), withRouterConfig({
+  paramsInheritanceStrategy: "always"
+  }))
+- to route programmatically -> router = inject(Router), router.navigate([], {replaceUrl: true // avoid going back to this})
+- not found -> path: "\*\*"
+- to redirect -> path: "", redirectTo: "", pathMatch: "prefix" (not full pathMatch) alternative is full
+- full checks for full path match, prefix checks for only the path.
+- [queryParams]="{order : 'asc'}"
+- can access static data via data: {} in routes
+- dynamic data via resolve: {userName: (activatedRoute: ActivatedRouteSnapshot, router: RouterStateSnapshot) => {svc = inject(UserService); userName = svc.users.find(u => u.id === activatedRoute.paramMap.get('userId')); return userName}}
+- userName = input()
+- resolve executes by default is route param changes and not query param changes
+- to rerun -> runGuardsAndResolvers: 'always' or 'paramsOrQueryParamsChange'
+- to update title / metadata in angular routes -> title: "" property in routes or dynamically -> title: (activatedRoute: ActivatedRouteSnapshot, router: RouterSnapshot) => {}
+- route guards -> canActivate, canMatch, etc. -> returns true / false based on logic
+- can also redirect based on new RedirectCommand(router.parseUrl('/'));
+- canDeactivate before leaving the page -> throw some alert
+- to reload same page-> router.navigate(["./"], {relativeTo: this.activatedRoute, onSameUrlNavigation: 'reload', queryParamsHandling: 'preserve'})

@@ -114,7 +114,6 @@ handleSelect(val: string) {
 ```
 
 - define onSelect in parent's .ts file
-
 - with signals:
 
 ```ts
@@ -127,8 +126,9 @@ handleSelect(val: string) {
 
 - same as @Output()
 - output is not a signal, it creates an underlying EventEmitter
-- why was it created? because no decorator required & shorter code syntax
-- doesn't matter @Output() / output() has stricter type checking
+- why was it created? because no decorator is now required & shorter code syntax
+- doesn't matter @Output() / output().
+- Has stricter type checking
 
 ### Loops and Conditions
 
@@ -148,7 +148,8 @@ handleSelect(val: string) {
 - alternate
 - To use ngFor and ngIf use NgFor and NgIf from @angular/common
 - Or import CommonModule
-- no option for else if. instead use ngSwitch
+- no option for \*ng else if.
+- instead use ngSwitch
 
 ```html
 <li *ngFor=""></li>

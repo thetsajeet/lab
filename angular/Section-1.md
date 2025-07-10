@@ -152,7 +152,7 @@ handleSelect(val: string) {
 - instead use ngSwitch
 
 ```html
-<li *ngFor=""></li>
+<li *ngFor="let user of users"></li>
 <div *ngIf="isEnabled; else fallback"></div>
 <ng-template #fallback>
   <p>fallback content</p>
@@ -173,6 +173,7 @@ handleSelect(val: string) {
 
 - Directives don't have template.
 - Enhances component with special features defined in the directive definition
+- Components are directives with templates
 - Eg: ngFor, ngIf, ngModel directives
 - [(ngModel)]="" -> 2 way data binding. To use import FormsModule
 - 2 way binding with signals:
@@ -180,6 +181,7 @@ handleSelect(val: string) {
 
 ### Form submissions
 
+- When using html form with FormsModule, Angular extends the built-in html form element with some additional features.
 - <form (ngSubmit)="handleSubmit()"></form> with FormsModule
 
 ### Other features

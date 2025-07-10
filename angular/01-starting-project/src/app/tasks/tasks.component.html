@@ -1,1 +1,20 @@
-<div>{{ user().name }}</div>
+@if (showAddTask()) {
+  <app-new-task (cancel)="showAddTask.set(false)" (submit)="onSubmit($event)" />
+}
+
+<section id="tasks">
+  <header>
+    <h2>{{ user().name }}'s Tasks</h2>
+    <menu>
+      <button (click)="showAddTask.set(true)">Add Task</button>
+    </menu>
+  </header>
+
+  <ul>
+    @for (task of userTasks(); track task.id) {
+    <li>
+      <app-task [task]="task" (complete)="onCompleteTask($event)" />
+    </li>
+    }
+  </ul>
+</section>

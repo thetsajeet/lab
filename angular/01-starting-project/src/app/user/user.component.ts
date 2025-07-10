@@ -7,6 +7,7 @@ import {
   signal,
 } from '@angular/core';
 import { DUMMY_USERS } from './dummy-users';
+import { User } from './user.model';
 
 const USER_IMAGE_SRC = 'assets/users';
 
@@ -21,10 +22,11 @@ export class UserComponent {
   // public selectedUser=DUMMY_USERS[this.randomIndex];
   // public selectedUser = signal(DUMMY_USERS[this.randomIndex]);
 
-  public selectedUser = input.required<(typeof DUMMY_USERS)[0]>({
+  public selectedUser = input.required<User>({
     alias: 'user',
   });
   public selectUser = output<string>();
+  public selected = input<boolean>(false);
 
   // public get userImageSrc(): string {
   //   return `${USER_IMAGE_SRC}/${this.selectedUser.avatar}`;

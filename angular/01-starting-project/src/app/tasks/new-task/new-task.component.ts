@@ -1,6 +1,7 @@
-import { Component, output } from '@angular/core';
+import { Component, output, inject, input } from '@angular/core';
 import { FormsModule, NgForm } from '@angular/forms';
 import { NewTask } from '../task.model';
+import { TasksService } from '../tasks.service';
 
 @Component({
   selector: 'app-new-task',
@@ -10,16 +11,19 @@ import { NewTask } from '../task.model';
   styleUrl: './new-task.component.css',
 })
 export class NewTaskComponent {
-  cancel = output();
-  submit = output<NewTask>();
+  userId = input.required<string>();
+  close = output();
+  tasksService = inject(TasksService);
 
   onCancel() {
-    this.cancel.emit();
+    this.close.emit();
   }
 
   onSubmit(formData: NgForm) {
     if (formData.form.status !== 'VALID') return;
 
-    this.submit.emit({ ...formData.form.value });
+    this.tasksService.addTask({ ...formData.form.value }, this.userId());
+
+    this.close.emit();
   }
 }

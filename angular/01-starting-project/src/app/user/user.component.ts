@@ -8,13 +8,14 @@ import {
 } from '@angular/core';
 import { DUMMY_USERS } from './dummy-users';
 import { User } from './user.model';
+import { CardComponent } from '../shared/card/card.component';
 
 const USER_IMAGE_SRC = 'assets/users';
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [],
+  imports: [CardComponent],
   templateUrl: './user.component.html',
   styleUrl: './user.component.css',
 })

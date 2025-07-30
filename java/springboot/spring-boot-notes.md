@@ -9,10 +9,6 @@
   - group -> package name
   - artifact -> class
 
-## REST API
-
-- RestController and RequestMapping
-
 ## Spring Boot production ready features
 
 - Initializer
@@ -21,3 +17,14 @@
 - Dev Tools
 - Logging
 - Monitoring (Spring boot actuator)
+
+## REST API
+
+- RestController for the class
+- RequestMapping for the API methods
+
+## application.properties / application.yaml file to specify env variables for spring boot application
+
+server.port = 9090
+
+- can be overwritten by command line arguments

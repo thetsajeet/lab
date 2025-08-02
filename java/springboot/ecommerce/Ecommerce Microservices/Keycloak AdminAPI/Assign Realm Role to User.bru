@@ -1,0 +1,29 @@
+meta {
+  name: Assign Realm Role to User
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:8443/admin/realms/ecom-app/users/567f4cb7-00f5-4290-a7fe-abfce18e478b/role-mappings/realm
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJfLW5scW9NMG5PUS1ZX1JFMUNoYTdjdmVmZG52UGl4UlNENEFaSDlaYUFnIn0.eyJleHAiOjE3NDc3MjY0NjgsImlhdCI6MTc0NzcyNjE2OCwianRpIjoib25sdHJvOmVhYjAxMzM1LWFmZjMtNGQ4ZS05MjBkLWViMjczOTFhNjQ2MiIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODQ0My9yZWFsbXMvZWNvbS1hcHAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiI1N2YxMWQ5Zi05Y2NjLTQ5ZGQtYWVhOC0yYjljNzE0NDA1YjMiLCJzY29wZSI6InByb2ZpbGUgZW1haWwifQ.lLpCCYX5151jSEPUgNUR_ASO6etaxSDWqWHHqv5KNUbG5NRYElnFGaTJGcjllVPtZmYku6ZNFSK0bRRQMiS7Ih9GHPjA3uX_4dd4TtsIZDU9TOu2_XISAu3vtVR04Aj-cycfBwRrpzL14naajMUnAEOEaNI9ke7B8OK_P03gmqugeX0QBfuBAVU7rXIYRN1GlzAwZOww_yeQx_RvdtxxHU-cm-g_YyXlQcJeC0L0a3ySxPlfhsUj5HI5XISqs51KXLvoyUgbDK5Q8nQUtalUQu4e9xm-e_-pKQrXCSAUZ6yRHYNALmUE9P531JrBwlsopXMHtleYLq-TgVNVkrHjmw
+  Content-Type: application/json
+}
+
+body:json {
+  [
+    {
+      "id": "9e9be7fd-ef18-481e-af72-b5e5cc957b09",
+      "name": "offline_access"
+    }
+  ]
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,38 @@
+meta {
+  name: PKCE FLOW
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://localhost:8080/api/home
+  body: none
+  auth: oauth2
+}
+
+headers {
+  ~Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIwcGdTNzRJUkpKSnRZRnJhZGJtM25xSGMtQk1JVnRKSVhjY2FRNGRSNVRvIn0.eyJleHAiOjE3NDY2OTE4MDMsImlhdCI6MTc0NjY5MTUwMywianRpIjoidHJydGNjOmFkNTZiMjU0LTQwNTItNDU1Yi04ZWIxLWI0NDBkMTFjNDBkYSIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODQ0My9yZWFsbXMvb2F1dGgyLWRlbW9zIiwiYXVkIjoiYWNjb3VudCIsInN1YiI6ImQwNzU1YWMxLWRjYTMtNDQ1ZS05NTc5LWI4M2JmMzJjYThiYSIsInR5cCI6IkJlYXJlciIsImF6cCI6Im9hdXRoMi1jbGllbnQtY3JlZGVudGlhbHMiLCJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbIi8qIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLW9hdXRoMi1kZW1vcyIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwiY2xpZW50SG9zdCI6IjE3Mi4xNy4wLjEiLCJlbWFpbF92ZXJpZmllZCI6ZmFsc2UsInByZWZlcnJlZF91c2VybmFtZSI6InNlcnZpY2UtYWNjb3VudC1vYXV0aDItY2xpZW50LWNyZWRlbnRpYWxzIiwiY2xpZW50QWRkcmVzcyI6IjE3Mi4xNy4wLjEiLCJjbGllbnRfaWQiOiJvYXV0aDItY2xpZW50LWNyZWRlbnRpYWxzIn0.BIToWAlBuMVlfclEdEAD1kUvW0ggS8Wh4lTMIfITWiX4YtEF-NK76MMtng9lmqgmZHGgMkQK_ebjnoocJTPW4lreutMI_Ys5SnFNV_Nxo-WgKtTd-ZHHLAyiuHaCwbqOfjxAkh_qm1AuiXyYILLQ6woFJWUcX6sY4AXGeEMZ1ehcllW1s33MnmksfXAWjL72pGXMFjcc1Whk5P9BcwWVyunpo42feD77la8OOVEiDkQN1hHsVibshrUmNa7kJaqp7qR3oITzHg59GYGwr3oZDf8AXebC7HnvN6RlZ95uXI3gMxHvmjUZk6fRWFxOw30egItqvSq34rS1vGXtXZFCug
+}
+
+auth:oauth2 {
+  grant_type: authorization_code
+  callback_url: http://localhost:5173
+  authorization_url: http://localhost:8443/realms/oauth2-demos/protocol/openid-connect/auth
+  access_token_url: http://localhost:8443/realms/oauth2-demos/protocol/openid-connect/token
+  refresh_token_url: 
+  client_id: oauth2-pkce-demo
+  client_secret: 
+  scope: openid profile roles email
+  state: 
+  pkce: true
+  credentials_placement: basic_auth_header
+  credentials_id: 
+  token_placement: header
+  token_header_prefix: 
+  auto_fetch_token: true
+  auto_refresh_token: false
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,30 @@
+meta {
+  name: Encrypt
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8888/encrypt
+  body: text
+  auth: inherit
+}
+
+headers {
+  Content-Type: text/plain
+}
+
+body:text {
+  Prod Message
+}
+
+settings {
+  encodeUrl: true
+}
+
+docs {
+  Generated from cURL: curl --location 'http://localhost:8888/encrypt' \
+  --header 'Content-Type: text/plain' \
+  --data 'Prod Message'
+  
+}

@@ -1,0 +1,42 @@
+meta {
+  name: Get Users
+  type: http
+  seq: 3
+}
+
+get {
+  url: http://localhost:8080/api/users
+  body: none
+  auth: oauth2
+}
+
+params:query {
+  ~: null
+}
+
+headers {
+  ~Authorization: Bearer 123
+}
+
+auth:oauth2 {
+  grant_type: authorization_code
+  callback_url: http://localhost:5173
+  authorization_url: http://localhost:8443/realms/ecom-app/protocol/openid-connect/auth
+  access_token_url: http://localhost:8443/realms/ecom-app/protocol/openid-connect/token
+  refresh_token_url: 
+  client_id: oauth2-pkce
+  client_secret: 
+  scope: openid profile roles email
+  state: 
+  pkce: true
+  credentials_placement: basic_auth_header
+  credentials_id: 
+  token_placement: header
+  token_header_prefix: 
+  auto_fetch_token: true
+  auto_refresh_token: false
+}
+
+settings {
+  encodeUrl: true
+}

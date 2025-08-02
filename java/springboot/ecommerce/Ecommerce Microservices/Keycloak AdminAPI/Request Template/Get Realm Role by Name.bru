@@ -1,0 +1,19 @@
+meta {
+  name: Get Realm Role by Name
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{keycloak_url}}/admin/realms/{{realm}}/roles/{{role_name}}
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{access_token}}
+}
+
+settings {
+  encodeUrl: true
+}

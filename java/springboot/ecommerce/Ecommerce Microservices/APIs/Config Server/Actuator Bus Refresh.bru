@@ -1,0 +1,15 @@
+meta {
+  name: Actuator Bus Refresh
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8081/actuator/busrefresh
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

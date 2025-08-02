@@ -1,0 +1,15 @@
+meta {
+  name: Actuator Shutdown
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8080/actuator/shutdown
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

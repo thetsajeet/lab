@@ -1,0 +1,19 @@
+meta {
+  name: Producer
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/send?message=HelloKafka
+  body: none
+  auth: inherit
+}
+
+params:query {
+  message: HelloKafka
+}
+
+settings {
+  encodeUrl: true
+}

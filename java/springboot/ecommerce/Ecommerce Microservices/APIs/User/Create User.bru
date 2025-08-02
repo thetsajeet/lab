@@ -1,0 +1,22 @@
+meta {
+  name: Create User
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8082/api/users
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "firstName": "John2",
+      "lastName": "Doe2"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

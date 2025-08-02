@@ -1,0 +1,27 @@
+meta {
+  name: Decrypt
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8888/decrypt
+  body: json
+  auth: none
+}
+
+params:query {
+  ~Content-Type: text/plain
+}
+
+headers {
+  Content-Type: text/plain
+}
+
+body:json {
+  AYCwNQERIgLO9lIkqwk0Cn5luAoybPGL36sqbl1O+5q73Ad1+n0nFNnwRT0VJORBTFBBRXuR5Qy95tldyVJxaAlFxaPIC1X82V+cYfm2aI5VI16rfazvJWkMYrv9iKm+yVPOnu8dsz38+lqw9BxCLVXFPgZEtkoBz/OuseeNUEd0StpLyTcIqkcmQhmLWylSDU5HuB/AShFqSBNA7kr8sjf5lilhOz4Bftg9zt5Gbr51JKnTXiW7ltj7Y8Cr80k79GKvUJ8k1FpgiIy/YHVthos5feYwVydSN5GwOuntuclbGa03zv5LeVUqJkqc6zLE7Y6CgX/k1buATCo+TbO9fG094HPtF+BBJ7NkNBzcLqlLaLMlSzBGLwyIGks9WpmSwmTdG5PzIBAlfzsBKC0dSoZbKyKqFdQdv3lQanPlyr+pd3JdQSKFSkhWDgIEpDWYx5dazEF9f2AUPXcPuI6PQK/GiNcJ3IhwGwmkPwsJLMK+E11zFBAIoh+5xzjn5SXzlwquqLamoiGx8nFPHrLTeKTNaufQMmPZCxfESltQUT2mRe1/Yy7OszhiSqxYs0z97ZPwdvLRK9TyFmcYmMtHrt71
+}
+
+settings {
+  encodeUrl: true
+}

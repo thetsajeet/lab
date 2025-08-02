@@ -1,0 +1,21 @@
+meta {
+  name: http://localhost:8080/actuator/loggers/com.app.ecom
+  type: http
+  seq: 5
+}
+
+post {
+  url: http://localhost:8080/actuator/loggers/com.app.ecom
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "configuredLevel": "DEBUG"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

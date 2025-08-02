@@ -1,0 +1,20 @@
+meta {
+  name: Spring Cloud Function Demo
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8080/uppercase
+  body: json
+  auth: none
+}
+
+body:json {
+  Whats up
+  
+}
+
+settings {
+  encodeUrl: true
+}

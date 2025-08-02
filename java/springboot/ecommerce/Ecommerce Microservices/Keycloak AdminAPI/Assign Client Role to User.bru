@@ -1,0 +1,29 @@
+meta {
+  name: Assign Client Role to User
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:8443/admin/realms/ecom-app/users/567f4cb7-00f5-4290-a7fe-abfce18e478b/role-mappings/clients/74d31cf4-5808-43de-93e0-01a079063245
+  body: json
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJfLW5scW9NMG5PUS1ZX1JFMUNoYTdjdmVmZG52UGl4UlNENEFaSDlaYUFnIn0.eyJleHAiOjE3NDc3MjY4NzcsImlhdCI6MTc0NzcyNjU3NywianRpIjoib25sdHJvOmNmMDk2NGJlLTg1NjUtNGYwMy04YjgyLTUzZWI0ZTAyNTUwMSIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODQ0My9yZWFsbXMvZWNvbS1hcHAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiI5ZGU3NDI1ZS1hNmI2LTRhODMtODdkZC00ZTY4MGY0NjY5N2QiLCJzY29wZSI6InByb2ZpbGUgZW1haWwifQ.lcVY-TAciOkEwhrV8VTO_or8Hft6ubS08Rh1EyrEIR4r3oOGr50J0jAOb-CnYJmfWZQUY6JQNCP8rBcgoSpsRP6dTOXr8gbQCL1TKxCQ5N3vNfRG-pgZdDZ0_YqRwbvBzz2YSsWsBR5xhkf-iMU8eYoNS_oZXiNRvzyQ9hv4Jph0cHFa1zMSaIlJctq9zMCGSuBHjMLw0t_oiDexEjNoZu3AysB1CgFga8pWAE9HnzR-9PNlvqgMWoDwee259tobmxMUxNpJpXMA6lBoiHI_PmeGLcK2SeeWUfTPeUXF5PyA9SXA6sRMJdwWpaxvfnEZNULj3bWNy5net31feRJoMw
+  Content-Type: application/json
+}
+
+body:json {
+  [
+    {
+      "id": "c512b750-78b5-4057-9dd8-7953a4b27fbc",
+      "name": "USER"
+    }
+  ]
+}
+
+settings {
+  encodeUrl: true
+}

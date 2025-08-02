@@ -1,0 +1,22 @@
+meta {
+  name: http://localhost:8443/realms/oauth2-demos/protocol/openid-connect/token
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8443/realms/oauth2-demos/protocol/openid-connect/token
+  body: formUrlEncoded
+  auth: none
+}
+
+body:form-urlencoded {
+  grant_type: client_credentials
+  client_id: oauth2-client-credentials
+  client_secret: DJuQevPvhLv5W5HaZC7LURHdtiVeRdMC
+  scope: openid email profile
+}
+
+settings {
+  encodeUrl: true
+}

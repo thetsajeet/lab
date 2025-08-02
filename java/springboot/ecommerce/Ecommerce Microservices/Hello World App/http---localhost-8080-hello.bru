@@ -1,0 +1,19 @@
+meta {
+  name: http://localhost:8080/hello
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/hello
+  body: text
+  auth: inherit
+}
+
+body:text {
+  Spring Boot
+}
+
+settings {
+  encodeUrl: true
+}

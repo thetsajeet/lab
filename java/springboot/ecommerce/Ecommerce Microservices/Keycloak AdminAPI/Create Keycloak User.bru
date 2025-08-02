@@ -1,0 +1,37 @@
+meta {
+  name: Create Keycloak User
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8443/admin/realms/ecom-app/users
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJfLW5scW9NMG5PUS1ZX1JFMUNoYTdjdmVmZG52UGl4UlNENEFaSDlaYUFnIn0.eyJleHAiOjE3NDc2NjI5ODEsImlhdCI6MTc0NzY2MjY4MSwianRpIjoib25sdHJvOmUzMzFlMzgwLTg2YWItNDc3MS05YTFlLTc2YjJiYmYxNmU0YiIsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODQ0My9yZWFsbXMvZWNvbS1hcHAiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzaWQiOiI2NzBlN2NhYy02Y2YyLTQzYWYtOGJkOC02MDc3OTcxMDlhNDgiLCJzY29wZSI6InByb2ZpbGUgZW1haWwifQ.BEGsZiAayvjIii25GRUBCUufEsR0ugXMPW3l8o9yKzTL3b2b-uMh18o15hspT82Y0CGkyrIyhkSpyAzsYoG4Po7VZBzY6jDuxwoRtdIrwJ13fwG3QTPM1t97BmWiP_aXNTy70iC1-nB2HI1J7OlXhokbPpxYn282WvD4ruvT41qxsr3As7VVfSd-xVFY1mgJFlwFxNT8-rZrXOp3PJyyHeccdySStr_TC7hmEWIoXm80-doYDRraDoQQJIjN1DEnOJD6F9hJd5RoEaWmH0kEWisYQKOZz2jwzS7dDb9mcMa4wR5X2d31ZK-WnjyFFiR9AxtZpY1YUrX0fY3Za7M9Xw
+}
+
+body:json {
+  {
+    "username": "usernew",
+    "email": "usernew@email.com",
+    "enabled": true,
+    "firstName": "New First Name",
+    "lastName": "New Last Name",
+    "credentials": [
+      {
+        "type": "password",
+        "value": "usernew",
+        "temporary": false
+      }
+    ]
+  }
+}
+
+settings {
+  encodeUrl: true
+}

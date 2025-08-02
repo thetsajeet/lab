@@ -1,0 +1,52 @@
+meta {
+  name: Create User
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/users
+  body: json
+  auth: oauth2
+}
+
+auth:oauth2 {
+  grant_type: authorization_code
+  callback_url: http://localhost:5173
+  authorization_url: http://localhost:8443/realms/ecom-app/protocol/openid-connect/auth
+  access_token_url: http://localhost:8443/realms/ecom-app/protocol/openid-connect/token
+  refresh_token_url: 
+  client_id: oauth2-pkce
+  client_secret: 
+  scope: openid profile roles email
+  state: 
+  pkce: true
+  credentials_placement: basic_auth_header
+  credentials_id: 
+  token_placement: header
+  token_header_prefix: 
+  auto_fetch_token: true
+  auto_refresh_token: false
+}
+
+body:json {
+  {
+      "username": "john21",
+      "password": "john21",
+      "firstName": "john21",
+      "lastName": "Doe21",
+      "email": "john21@gmail.com",
+      "phone": "335128571",
+      "address": {
+          "street": "123 Main St",
+          "city": "New York",
+          "state": "NY",
+          "country": "USA",
+          "zipcode": "10001"
+      }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

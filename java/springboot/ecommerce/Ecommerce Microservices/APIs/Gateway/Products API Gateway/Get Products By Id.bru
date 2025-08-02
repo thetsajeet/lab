@@ -1,0 +1,15 @@
+meta {
+  name: Get Products By Id
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/api/products/2
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

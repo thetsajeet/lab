@@ -1,0 +1,45 @@
+meta {
+  name: Get Admin Token
+  type: http
+  seq: 2
+}
+
+post {
+  url: http://localhost:8443/realms/ecom-app/protocol/openid-connect/token
+  body: formUrlEncoded
+  auth: oauth2
+}
+
+headers {
+  Content-Type: application/x-www-form-urlencoded
+}
+
+auth:oauth2 {
+  grant_type: authorization_code
+  callback_url: http://localhost:5173
+  authorization_url: http://localhost:8443/realms/oauth2-demos/protocol/openid-connect/auth
+  access_token_url: http://localhost:8443/realms/oauth2-demos/protocol/openid-connect/token
+  refresh_token_url: 
+  client_id: oauth2-pkce-demo
+  client_secret: 
+  scope: openid profile roles email
+  state: 
+  pkce: true
+  credentials_placement: basic_auth_header
+  credentials_id: 
+  token_placement: header
+  token_header_prefix: 
+  auto_fetch_token: true
+  auto_refresh_token: false
+}
+
+body:form-urlencoded {
+  client_id: admin-cli
+  username: user
+  password: user
+  grant_type: password
+}
+
+settings {
+  encodeUrl: true
+}

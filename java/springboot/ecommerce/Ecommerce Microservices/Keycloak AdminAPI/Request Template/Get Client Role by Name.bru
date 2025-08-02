@@ -1,0 +1,19 @@
+meta {
+  name: Get Client Role by Name
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{keycloak_url}}/admin/realms/{{realm}}/clients/{{client_id}}/roles/{{role_name}}
+  body: none
+  auth: inherit
+}
+
+headers {
+  Authorization: Bearer {{access_token}}
+}
+
+settings {
+  encodeUrl: true
+}

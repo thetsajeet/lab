@@ -1,0 +1,27 @@
+meta {
+  name: Get All Products
+  type: http
+  seq: 4
+}
+
+get {
+  url: http://localhost:8080/api/products
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "name": "iPhone 16 Pro Updated",
+      "description": "Latest iPhone with amazing features",
+      "price": 1099.99,
+      "stockQuantity": 50,
+      "category": "Electronics",
+      "imageUrl": "https://placehold.co/600x400"
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+}

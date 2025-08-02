@@ -52,3 +52,4 @@ Requires default constructor to create entities
 4. Create services using @Service and use it in controllers
 5. Create models using @Data (lombok)
 6. Create repositories using @Repository and extend from JpaRepository<Model, type of primary key>
+7. DTO (Data Transfer Object) -> pattern used to transfer data between software application and subsystems.

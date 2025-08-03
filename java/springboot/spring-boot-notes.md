@@ -53,3 +53,13 @@ Requires default constructor to create entities
 5. Create models using @Data (lombok)
 6. Create repositories using @Repository and extend from JpaRepository<Model, type of primary key>
 7. DTO (Data Transfer Object) -> pattern used to transfer data between software application and subsystems.
+
+## Writing complex queries using JPA
+
+1. Say you want to find all by a field isActive true -> public T findByisActiveTrue();
+2. For custom queries use Query and Param
+
+```java
+@Query("SELECT p from products where p.id = :id")
+public List<Product> getAllProducts(@Param("id") String id) {}
+```

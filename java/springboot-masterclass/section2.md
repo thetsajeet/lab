@@ -1,0 +1,31 @@
+# Section 2 - How does the web work
+
+- Internet vs WWW:
+  - internet is a system of interconnected devices that communicate with each other. (hardware)
+  - www is world wide web that is a system of interlinked documents (websites) accessed via the internet. (software)
+- How does web work?
+  - Clients send request to server, server looks it up in the database, sends back a response to the client.
+  - The interface between each layer is called API - Application Programming Interface
+- REST APIs
+  - Representational State Transfer
+  - Stateless - doesn't remember previous requests
+- HTTP vs HTTPS
+  - HyperText Transfer Protocol (Secure for HTTPS)
+  - HTTP sends plain data, https encrypts data using TLS
+- Status Codes
+  - to convey information about the status of the request-response
+  - 1xx - informational
+  - 2xx - success
+  - 3xx - redirection
+  - 4xx - client side error
+  - 5xx - server side error
+- Resource:
+  - any information that can be named or identified, eg: picture, profile, post, etc.
+- URI:
+  - Uniform Resource Identifier - to identify a resource
+  - URI = URL + URN
+  - URL - Uniform Resource Location
+  - URN - Uniform Resource Name
+- Sub Resources
+  - Extends the resource to find sub resource
+  - /users -> resource and /users/:id/posts -> sub resource

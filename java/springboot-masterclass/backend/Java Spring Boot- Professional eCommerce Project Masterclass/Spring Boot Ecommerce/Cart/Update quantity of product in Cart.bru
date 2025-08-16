@@ -1,0 +1,19 @@
+meta {
+  name: Update quantity of product in Cart
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/api/cart/products/1/quantity/delete
+  body: none
+  auth: none
+}
+
+headers {
+  ~: 
+}
+
+settings {
+  encodeUrl: true
+}

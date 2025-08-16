@@ -1,0 +1,22 @@
+meta {
+  name: Sign in
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/auth/signin
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "username":"user1",
+      "password":"password1"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

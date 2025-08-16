@@ -1,0 +1,21 @@
+meta {
+  name: Create new Category
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:8080/api/admin/categories
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "categoryName":"Sports & Fitness"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

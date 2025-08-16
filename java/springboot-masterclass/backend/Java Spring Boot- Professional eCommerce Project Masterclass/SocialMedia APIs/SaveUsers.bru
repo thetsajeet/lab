@@ -1,0 +1,25 @@
+meta {
+  name: SaveUsers
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:8080/social/users
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+          "id": 10,
+          "socialProfile": {
+              "id": 10,
+              "description":"Test 4"
+          }
+  }
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,27 @@
+meta {
+  name: Create Address
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://localhost:8080/api/addresses
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+      "country": "USA",
+      "city": "San Francisco",
+      "street": "Market Street",
+      "pincode": "94103",
+      "buildingName": "Bay Apartments",
+      "state": "California"
+  }
+  
+}
+
+settings {
+  encodeUrl: true
+}

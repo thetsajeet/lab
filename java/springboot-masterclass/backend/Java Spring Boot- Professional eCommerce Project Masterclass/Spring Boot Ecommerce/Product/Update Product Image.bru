@@ -1,0 +1,19 @@
+meta {
+  name: Update Product Image
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://localhost:8080/api/products/202/image
+  body: multipartForm
+  auth: inherit
+}
+
+body:multipart-form {
+  image: @file(/C:/Users/FAISAL/Downloads/placeholder.png)
+}
+
+settings {
+  encodeUrl: true
+}

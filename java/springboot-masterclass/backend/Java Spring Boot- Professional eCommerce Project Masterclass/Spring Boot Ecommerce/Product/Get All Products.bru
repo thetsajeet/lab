@@ -1,0 +1,28 @@
+meta {
+  name: Get All Products
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://localhost:8080/api/public/products?sortBy=price&sortOrder=desc&pageSize=20
+  body: none
+  auth: inherit
+}
+
+params:query {
+  sortBy: price
+  sortOrder: desc
+  pageSize: 20
+  ~pageNumber: 1
+  ~keyword: blender
+  ~category: Electronics
+}
+
+headers {
+  ~Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1c2VyMSIsImlhdCI6MTcxNTE4MzY0OSwiZXhwIjoxNzE1MTg2NjQ5fQ.XS0-JKPhMJMrULRonqYLQzhJFTFOXGxkeuFj4q4mxeE
+}
+
+settings {
+  encodeUrl: true
+}

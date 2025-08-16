@@ -1,0 +1,22 @@
+meta {
+  name: Get Products By Keyword
+  type: http
+  seq: 6
+}
+
+get {
+  url: http://localhost:8080/api/public/products/keyword/rob?pageNumber=0&pageSize=10&sortBy=productName&sortOrder=desc
+  body: none
+  auth: inherit
+}
+
+params:query {
+  pageNumber: 0
+  pageSize: 10
+  sortBy: productName
+  sortOrder: desc
+}
+
+settings {
+  encodeUrl: true
+}

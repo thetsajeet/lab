@@ -1,0 +1,19 @@
+meta {
+  name: Delete product from cart
+  type: http
+  seq: 5
+}
+
+delete {
+  url: http://localhost:8080/api/carts/1/product/1
+  body: none
+  auth: none
+}
+
+headers {
+  ~: 
+}
+
+settings {
+  encodeUrl: true
+}

@@ -1,0 +1,22 @@
+meta {
+  name: Get All Categories
+  type: http
+  seq: 1
+}
+
+get {
+  url: http://localhost:8080/api/public/categories
+  body: none
+  auth: inherit
+}
+
+params:query {
+  ~pageNumber: 0
+  ~pageSize: 10
+  ~sortBy: categoryName
+  ~sortOrder: desc
+}
+
+settings {
+  encodeUrl: true
+}

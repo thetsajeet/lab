@@ -1,0 +1,21 @@
+meta {
+  name: Update Category
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://localhost:8080/api/admin/categories/0
+  body: json
+  auth: inherit
+}
+
+body:json {
+  {
+      "categoryName":"Travel Updated"
+  }
+}
+
+settings {
+  encodeUrl: true
+}

@@ -37,7 +37,7 @@ public class CategoryService {
                 .stream()
                 .map(cat -> modelMapper.map(cat, CategoryDTO.class))
                 .toList();
-        
+
         CategoryResponseDTO categoryResponseDTO = new CategoryResponseDTO();
         categoryResponseDTO.setPageNumber(categoryPage.getNumber());
         categoryResponseDTO.setPageSize(categoryPage.getSize());
@@ -59,7 +59,7 @@ public class CategoryService {
         return modelMapper.map(cat, CategoryDTO.class);
     }
 
-    public CategoryDTO deleteCategory(Long id) {
+    public void deleteCategory(Long id) {
         Optional<Category> optionalCategory = categoryRepository
                 .findById(id);
 
@@ -67,8 +67,6 @@ public class CategoryService {
             throw new ResourceNotFoundException("Category", "id", id);
 
         categoryRepository.delete(optionalCategory.get());
-
-        return modelMapper.map(optionalCategory.get(), CategoryDTO.class);
     }
 
     public CategoryDTO updateCategory(Long id, CategoryDTO c) {
@@ -77,7 +75,7 @@ public class CategoryService {
                 .orElseThrow(() -> new ResourceNotFoundException("Category", "id", id));
 
         Category category = modelMapper.map(c, Category.class);
-        category.setId(cat.getId());
+        category.setCategoryId(cat.getCategoryId());
         cat = categoryRepository.save(category);
 
         return modelMapper.map(cat, CategoryDTO.class);

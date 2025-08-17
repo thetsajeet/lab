@@ -1,13 +1,12 @@
 package com.ecommerce.backend.services;
 
+import com.ecommerce.backend.exceptions.APIException;
+import com.ecommerce.backend.exceptions.ResourceNotFoundException;
 import com.ecommerce.backend.models.Category;
 import com.ecommerce.backend.repositories.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +21,11 @@ public class CategoryService {
     }
 
     public String createCategory(Category c) {
+        if (categoryRepository
+                .findByCategoryName(c.getCategoryName())
+                .isPresent())
+            throw new APIException("Category with name: " + c.getCategoryName() + " already exists.");
+
         categoryRepository.save(c);
         return "success";
     }
@@ -30,8 +34,8 @@ public class CategoryService {
         Optional<Category> optionalCategory = categoryRepository
                 .findById(id);
 
-        if(optionalCategory.isEmpty())
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "resource not found");
+        if (optionalCategory.isEmpty())
+            throw new ResourceNotFoundException("Category", "id", id);
 
         categoryRepository.delete(optionalCategory.get());
 
@@ -41,7 +45,7 @@ public class CategoryService {
     public String updateCategory(Long id, Category category) {
         Category cat = categoryRepository
                 .findById(id)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "resource not found"));
+                .orElseThrow(() -> new ResourceNotFoundException("Category", "id", id));
 
         category.setId(cat.getId());
         categoryRepository.save(category);

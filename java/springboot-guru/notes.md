@@ -63,3 +63,9 @@ springboot-app/
                         └── DemoApplicationTests.java
 
 ```
+
+## Spring MVC
+
+- Model View Controller
+- Model (POJOs) + View (HTML) + Controller (Handle requests)
+- Client -> Dispatcher Servlet (Tomcat) -> Controller -> Service -> Data JPA -> DB -...-> Controller -> Model -> Dispatcher Servlet -> Model -> View -> Dispatcher Servlet -> Client

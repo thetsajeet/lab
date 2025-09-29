@@ -5,13 +5,13 @@ meta {
 }
 
 put {
-  url: http://localhost:8080/api/products/202/image
+  url: http://localhost:8080/api/admin/products/1/image
   body: multipartForm
   auth: inherit
 }
 
 body:multipart-form {
-  image: @file(/C:/Users/FAISAL/Downloads/placeholder.png)
+  image: @file(/home/aj7/Pictures/wallpaper1.jpg)
 }
 
 settings {

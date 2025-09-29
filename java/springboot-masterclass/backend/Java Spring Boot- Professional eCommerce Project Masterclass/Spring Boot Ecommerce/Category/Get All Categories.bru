@@ -5,16 +5,16 @@ meta {
 }
 
 get {
-  url: http://localhost:8080/api/public/categories?pageNumber=1&pageSize=20
+  url: http://localhost:8080/api/public/categories?pageNumber=1&sortBy=categoryName&sortOrder=desc
   body: none
   auth: inherit
 }
 
 params:query {
   pageNumber: 1
-  pageSize: 20
-  ~sortBy: categoryName
-  ~sortOrder: desc
+  sortBy: categoryName
+  sortOrder: desc
+  ~pageSize: 20
 }
 
 settings {

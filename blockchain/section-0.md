@@ -63,4 +63,3 @@
 - Blocks also contain a prev hash value of the previously computed hash block
 - 1st block - genesis block. without any previous hash value
 - with distributed blockchain, if any one actor modifies blockchain then is verified with other peers. Since they have changed, it will be known that they chained
--

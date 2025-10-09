@@ -1,5 +1,6 @@
 package guru.springframework.spring6restmvc.controller;
 
+import guru.springframework.spring6restmvc.constants.URIConstants;
 import guru.springframework.spring6restmvc.model.Beer;
 import guru.springframework.spring6restmvc.services.BeerService;
 import lombok.AllArgsConstructor;
@@ -18,14 +19,14 @@ import java.util.UUID;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping("/api/v1/beer")
+@RequestMapping(URIConstants.BEER_PATH_V1)
 public class BeerController {
     private final BeerService beerService;
 
-    @GetMapping("/{id}")
-    public Beer getBeerById(@PathVariable UUID id){
+    @GetMapping(URIConstants.BEER_ID_PATH)
+    public Beer getBeerById(@PathVariable UUID beerId){
         log.debug("Get Beer by Id - in controller");
-        return beerService.getBeerById(id);
+        return beerService.getBeerById(beerId);
     }
 
     @GetMapping()
@@ -43,15 +44,21 @@ public class BeerController {
         return new ResponseEntity<>(headers, HttpStatus.CREATED);
     }
 
-    @PutMapping("/{beerId}")
+    @PutMapping(URIConstants.BEER_ID_PATH)
     public ResponseEntity<?> updateBeer(@PathVariable UUID beerId, @RequestBody Beer beer){
         beerService.updateBeer(beerId, beer);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @DeleteMapping("/{beerId}")
+    @DeleteMapping(URIConstants.BEER_ID_PATH)
     public ResponseEntity<?> deleteBeer(@PathVariable UUID beerId){
         beerService.deleteById(beerId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PatchMapping(URIConstants.BEER_ID_PATH)
+    public ResponseEntity<?> patchBeer(@PathVariable UUID beerId, @RequestBody Beer beer) {
+        beerService.patchBeer(beerId, beer);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

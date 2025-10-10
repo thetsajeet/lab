@@ -26,7 +26,7 @@ public class BeerController {
     @GetMapping(URIConstants.BEER_ID_PATH)
     public Beer getBeerById(@PathVariable UUID beerId){
         log.debug("Get Beer by Id - in controller");
-        return beerService.getBeerById(beerId);
+        return beerService.getBeerById(beerId).orElseThrow(NotFoundException::new);
     }
 
     @GetMapping()
@@ -53,7 +53,7 @@ public class BeerController {
     @DeleteMapping(URIConstants.BEER_ID_PATH)
     public ResponseEntity<?> deleteBeer(@PathVariable UUID beerId){
         beerService.deleteById(beerId);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return ResponseEntity.noContent().build();
     }
 
     @PatchMapping(URIConstants.BEER_ID_PATH)
@@ -61,4 +61,10 @@ public class BeerController {
         beerService.patchBeer(beerId, beer);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+//    // Common technique to implement in controller
+//    @ExceptionHandler(NotFoundException.class)
+//    public ResponseEntity<String> handleNotFoundException(NotFoundException e) {
+//        return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+//    }
 }

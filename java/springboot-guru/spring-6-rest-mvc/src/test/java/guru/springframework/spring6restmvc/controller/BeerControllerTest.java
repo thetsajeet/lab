@@ -21,6 +21,7 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Map;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -103,14 +104,14 @@ class BeerControllerTest {
                 .updateDate(LocalDateTime.now())
                 .build();
 
-        given(beerService.getBeerById(testBeer.getId())).willReturn(testBeer);
+        given(beerService.getBeerById(testBeer.getId())).willReturn(Optional.of(testBeer));
 
-        mockMvc.perform(get(URIConstants.BEER_PATH_V1, testBeer.getId().toString())
+        mockMvc.perform(get(URIConstants.BEER_PATH_V1 + "/" + testBeer.getId().toString())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.id", is(testBeer.getId().toString())))
-                .andExpect(jsonPath("$.beerName", is(testBeer.getBeerName())));
+                .andExpect(jsonPath("$.beerName", is("Sunshine City")));;
     }
 
     @Test
@@ -162,7 +163,7 @@ class BeerControllerTest {
                 .updateDate(LocalDateTime.now())
                 .build();
 
-        mockMvc.perform(put(URIConstants.BEER_PATH_V1, requestBeer.getId().toString())
+        mockMvc.perform(put(URIConstants.BEER_PATH_V1 + '/' + requestBeer.getId().toString())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestBeer)))
@@ -185,7 +186,7 @@ class BeerControllerTest {
                 .updateDate(LocalDateTime.now())
                 .build();
 
-        mockMvc.perform(delete(URIConstants.BEER_PATH_V1, testBeer.getId().toString())
+        mockMvc.perform(delete(URIConstants.BEER_PATH_V1 + '/' + testBeer.getId().toString())
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
 
@@ -211,7 +212,7 @@ class BeerControllerTest {
                 .updateDate(LocalDateTime.now())
                 .build();
 
-        mockMvc.perform(patch(URIConstants.BEER_PATH_V1,existingBeer.getId().toString())
+        mockMvc.perform(patch(URIConstants.BEER_PATH_V1 + '/' +existingBeer.getId().toString())
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(requestBeer)))

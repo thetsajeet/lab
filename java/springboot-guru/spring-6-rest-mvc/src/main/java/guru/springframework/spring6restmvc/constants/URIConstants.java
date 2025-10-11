@@ -1,11 +1,11 @@
 package guru.springframework.spring6restmvc.constants;
 
 public class URIConstants {
-    // Beer constants
+    // BeerDTO constants
     // Versions
     public static final String BEER_PATH_V1 = "/api/v1/beer";
 
-    // Beer Id
+    // BeerDTO Id
     public static final String BEER_ID_PATH = "/{beerId}";
 
    // Endpoints

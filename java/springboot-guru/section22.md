@@ -1,6 +1,7 @@
 # Spring Security HTTP basic
 
 - not recommended for entreprise grade projects
+- use only if you have https enabled, since it encrypts the traffic
 - spring-boot-starter-security
 - user generated security password will be displayed
 - set basic auth in header: `user, password`

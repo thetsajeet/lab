@@ -1,0 +1,27 @@
+services:
+  postgres:
+    image: postgres:16 # Use a specific version for stability
+    restart: always
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: pass
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5432:5432" # Maps container port 5432 to host port 5432
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persists data even if container is removed
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@example.com
+      PGADMIN_DEFAULT_PASSWORD: pass
+    ports:
+      - "8080:80" # Maps container port 80 to host port 8080
+    depends_on:
+      - postgres
+
+volumes:
+  postgres_data:
+

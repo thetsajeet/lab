@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie & Session Demo</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Cookie & Session Demo</h1>
+
+      <div class="card">
+        <h2>Status</h2>
+        <div id="status-display" class="status-box">Checking status...</div>
+      </div>
+
+      <div class="card">
+        <h2>Actions</h2>
+        <div class="button-group">
+          <button id="btn-unprotected" class="btn secondary">
+            Check Unprotected
+          </button>
+          <button id="btn-protected" class="btn primary">
+            Check Protected
+          </button>
+        </div>
+
+        <div class="login-form">
+          <h3>Login</h3>
+          <input
+            type="text"
+            id="username"
+            placeholder="Username (admin)"
+            value="admin"
+          />
+          <input
+            type="password"
+            id="password"
+            placeholder="Password (pass)"
+            value="pass"
+          />
+          <div class="button-group">
+            <button id="btn-login" class="btn success">Login</button>
+            <button id="btn-logout" class="btn danger">Logout</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Response Log</h2>
+        <pre id="response-log">Waiting for interaction...</pre>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

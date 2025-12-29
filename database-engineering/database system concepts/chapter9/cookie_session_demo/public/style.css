@@ -13,7 +13,11 @@
 body {
   font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Helvetica, Arial, sans-serif;
-  background-color: var(--bg-color);
+  background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.85)),
+    url("cookie_background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   color: var(--text-primary);
   margin: 0;
   padding: 0;
@@ -36,6 +40,7 @@ h1 {
   text-align: center;
   background: linear-gradient(to right, #60a5fa, #a78bfa);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 10px;
 }
@@ -147,4 +152,54 @@ pre {
   color: #cbd5e1;
   margin: 0;
   white-space: pre-wrap;
+}
+
+.instruction-content {
+  color: var(--text-secondary);
+}
+
+.instruction-content p {
+  line-height: 1.6;
+  margin-bottom: 15px;
+}
+
+.instruction-content ul {
+  padding-left: 20px;
+  margin-bottom: 15px;
+}
+
+.instruction-content li {
+  margin-bottom: 8px;
+}
+
+.instruction-content strong {
+  color: var(--text-primary);
+}
+
+.instruction-content code {
+  background-color: rgba(0, 0, 0, 0.3);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: monospace;
+  color: var(--accent-primary);
+}
+
+.instruction-item {
+  margin-bottom: 25px;
+}
+
+.instruction-item h3 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: var(--text-primary);
+}
+
+.instruction-icon {
+  width: 20px;
+  height: 20px;
+  color: var(--accent-primary);
+  flex-shrink: 0;
 }

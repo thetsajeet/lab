@@ -51,6 +51,105 @@
         <h2>Response Log</h2>
         <pre id="response-log">Waiting for interaction...</pre>
       </div>
+
+      <div class="card">
+        <h2>About Cookies & Sessions</h2>
+        <div class="instruction-content">
+          <div class="instruction-item">
+            <h3>
+              <svg
+                class="instruction-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5"
+                ></path>
+                <path d="M8.5 8.5v.01"></path>
+                <path d="M16 15.5v.01"></path>
+                <path d="M12 12v.01"></path>
+                <path d="M11 17v.01"></path>
+                <path d="M7 14v.01"></path>
+              </svg>
+              Cookies
+            </h3>
+            <p>
+              Small pieces of data stored on your device by the web browser.
+              They are used to remember stateful information (like items in a
+              shopping cart) or to record the user's browsing activity.
+            </p>
+          </div>
+
+          <div class="instruction-item">
+            <h3>
+              <svg
+                class="instruction-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+                <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+                <line x1="6" y1="6" x2="6.01" y2="6"></line>
+                <line x1="6" y1="18" x2="6.01" y2="18"></line>
+              </svg>
+              Sessions
+            </h3>
+            <p>
+              A way to store data on the server-side to be used across multiple
+              pages. A session ID is usually stored in a cookie on the
+              client-side to link the user to their session data on the server.
+            </p>
+          </div>
+
+          <div class="instruction-item">
+            <h3>
+              <svg
+                class="instruction-icon"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+              </svg>
+              How to Check Cookies
+            </h3>
+            <p>
+              You can inspect the cookies stored by this website using your
+              browser's developer tools:
+            </p>
+            <ul>
+              <li>
+                <strong>Chrome/Edge:</strong> Right-click > Inspect >
+                Application tab > Storage > Cookies
+              </li>
+              <li>
+                <strong>Firefox:</strong> Right-click > Inspect > Storage tab >
+                Cookies
+              </li>
+              <li>
+                <strong>Safari:</strong> Right-click > Inspect Element > Storage
+                tab > Cookies
+              </li>
+            </ul>
+            <p>
+              Look for a cookie named <code>connect.sid</code> (or similar)
+              after logging in.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="script.js"></script>
